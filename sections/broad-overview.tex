@@ -1,0 +1,66 @@
+\section{Density, Radius, and Regularization Methods}
+\subsection{Radial Density}
+Radial density defined as $\rho(r) = \langle \Psi(r')| \delta(r - r') | \Psi(r')\rangle$. Let $\hat{\rho}(r) = \delta(r-r')$.
+\subsubsection{Complex Scaling the Density Operator}
+$\hat{\rho}_\theta(r) = \delta(r - r'e^{i\theta}) = e^{-i\theta}\delta(re^{-i\theta} - r')$. Thus,
+$$
+\rho_\theta(r) = \Gamma e^{-i\theta} u_\theta^2(re^{-i\theta}),
+$$
+where $\Gamma = \int d\Omega\; (Y_0^0(\Omega))^2$.
+\subsubsection{Finding the density through backrotation}
+Back-rotate resonance wavefunction: $\Psi_{\theta,BR}(r) = \frac{u_\theta(e^{-i\theta}r)}{e^{-i\theta}r}$ to recover Gamow state, then compute density with un-rotated density operator. Thus,
+$$
+\rho_{\theta, BR}(r) = \Gamma e^{2i\theta} u_\theta^2(e^{-i\theta}r)
+$$
+\subsection{Radius squared operator ($r^2$)}
+$\langle r^2\rangle_\phi$ is radius squared operator of CS'd state $\psi_\phi$. $r\rightarrow \exp(i\phi) r$, so
+$$
+\langle r^2 \rangle_\phi = \frac{1}{4}\int \;d\Omega\; Y_0^0(\Omega) \int\; r^2 dr \;r^2 e^{2i\phi} \psi_\phi(r)^2
+$$
+$$
+= \frac{1}{4}\Gamma \int\; r^2 dr\; e^{2i\phi} r^2 \left(\frac{u_\phi(r)}{r}\right)^2 = \frac{1}{4}\Gamma \int \; dr\; e^{2i\phi} r^2 u^2_\phi(r)
+$$
+the $1/4$ factor is just to average out the CM. $\Gamma$ factor is angular contribution (we work exclusively in S wave) and is ignored. DVR code is working in relative coordinate of reduced radial equation, so $u_\phi$ are the eigenvectors.
+$\langle r^2 \rangle_{\text{BR}}$ is the expectation value of the back-rotated Gamow state. Here $r^2$ is un-rotated, and $\psi_{\phi=0}=\psi_{\phi}(re^{-i\phi}) = \frac{u_\phi(e^{-i\phi} r)}{e^{-i\phi}r}$. Thus,
+
+$$
+\langle r^2 \rangle_{\text{BR}} = \int dr\; e^{2i\phi} r^2 u_\phi^2 (e^{-i\phi}r)
+$$
+In DVR quadrature
+$$
+\langle r^2 \rangle_{\text{BR}} = \sum_k e^{2i\phi} r_k^2 u_\phi^2 (e^{-i\phi}r_k) \omega_k
+$$
+\subsection{Tikhonov Regularization}
+
+$$
+\langle r^2 \rangle_{\text{BR}} = \int dr\; r^2 u_\theta(e^{-i\theta}r)e^{2i\theta}
+$$
+Let $f_\theta(r) = r^2 u^2_\theta(r)$. Then, 
+$$
+\langle r^2 \rangle_{\text{BR}} = e^{4i\theta}\int dr\; f_\theta(e^{-i\theta} r).
+$$
+Changing variables $x=-\ln(r/r_0)$ gives $\tilde{f}_\theta(x)=f_\theta(r_0e^{-x})$ (domain goes from $(0, \infty)\rightarrow (-\infty,\infty)$. Fourier transform:
+$$
+\hat{f}_\theta(\xi) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty dx\; e^{-ix\xi}\tilde{f}_\theta(x)
+$$
+Now, analytically continuing to complex plane: $\tilde{f}_\theta(x+iy)=f_\theta(r_0e^{-x}e^{-iy})$. So, $\tilde{f}_\theta(x+i\theta) = f_\theta(e^{-i\theta}r)$.
+$$
+\tilde{f}_\theta(x + i\theta) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty d\xi\; e^{i(x+i\theta)\xi}\hat{f}_\theta(\xi)
+$$
+$$
+= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty d\xi\; e^{ix\xi}e^{-\theta\xi}\hat{f}_\theta(\xi).
+$$
+Tikhonov cuts off the UV modes: $\Gamma_{\text{Tikhonov}} = \frac{1}{1+\kappa e^{-2\theta\xi}}$. Thus,
+$$
+\tilde{f}_{\text{reg},\theta}(x + i\theta)=  \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty d\xi\; e^{ix\xi}e^{-\theta\xi}\hat{f}_\theta(\xi)\Gamma_{\text{Tikhonov}}.
+$$
+
+Thus,
+$$
+\langle r^2\rangle_{\text{BR}} = e^{4i\theta} \int_0^\infty dr \;\tilde{f}_{\text{reg},\theta}(r) = e^{4i\theta}\int_\infty^{-\infty}-r_0e^{-x}\;dx\;\tilde{f}_{\text{reg},\theta}(x+i\theta)
+$$
+$$
+= e^{4i\theta}\int_{-\infty}^{\infty}r_0e^{-x}\;dx\;\tilde{f}_{\text{reg},\theta}(x+i\theta)
+$$
+\subsection{Zeldovich Regularization}
+To be added.
