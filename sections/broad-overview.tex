@@ -1,17 +1,19 @@
 \section{Density, Radius, and Regularization Methods}
 \subsection{Radial Density}
-Radial density defined as $\rho(r) = \langle \Psi(r')| \delta(r - r') | \Psi(r')\rangle$. Let $\hat{\rho}(r) = \delta(r-r')$.
+Radial density defined as $\rho(r) = \langle \Psi(r')| \delta(r - r') | \Psi(r')\rangle$. Let $\hat{\rho}(r) = \delta(r-r')$. In our case the density comes out to be $\rho(r)=\Gamma u(r)^2$. In more complicated systems, the result is more complicated. 
+
 \subsubsection{Complex Scaling the Density Operator}
-$\hat{\rho}_\theta(r) = \delta(r - r'e^{i\theta}) = e^{-i\theta}\delta(re^{-i\theta} - r')$. Thus,
-$$
-\rho_\theta(r) = \Gamma e^{-i\theta} u_\theta^2(re^{-i\theta}),
-$$
-where $\Gamma = \int d\Omega\; (Y_0^0(\Omega))^2$.
+The $\delta(r - r')$ is not something that can be complex-rotated in a traditional sense. It's a distribution, and it definitely doesn't behave in the well-defined way that most observables do (the conditions outlined in \cref{sssection:obs_phi_indep}. As such, there's not really a well-defined way to define the rotated version of $\delta(r - r')$. Instead, we can define an operator $\rho_\theta(r) = (\psi_\theta|\delta(r-r')|\psi_\theta)$. I.e., we don't attempt to rotate the Dirac delta. This expression is of course $\theta$-dependent, and so the goal would be to compute it at $\theta=0$. As such, we need to involve back-rotation. 
+
+In our case, $\rho_\theta(r) = (\psi_\theta|\delta(r-r')|\psi_\theta) =\Gamma e^{i\theta}u_\theta(r)^2$. This varies with $\theta$, but the interior stays nearly constant. The $e^{i\theta}$ factor comes from the $e^{3i\theta/2}$ factor in the 3D complex scaling operation $\Psi_\theta(r) = U_\theta\Psi(r) = e^{i3\theta/2}\Psi(re^{i\theta})$.
 \subsubsection{Finding the density through backrotation}
-Back-rotate resonance wavefunction: $\Psi_{\theta,BR}(r) = \frac{u_\theta(e^{-i\theta}r)}{e^{-i\theta}r}$ to recover Gamow state, then compute density with un-rotated density operator. Thus,
+The back-rotated density is just $\rho^{\text{back}}(r) = \Gamma u_0(r)^2 =  \Gamma u_\theta(re^{-i\theta})^2$ because the back-rotated wavefunction is just the original Gamow state. Casting this with respect to the psuedo-rotated density:
+
 $$
-\rho_{\theta, BR}(r) = \Gamma e^{2i\theta} u_\theta^2(e^{-i\theta}r)
+\rho_{\theta, BR}(r) = e^{-i\theta} \rho_\theta(re^{-i\theta}),
 $$
+
+One can alternatively show this with a similar integral argument that justified $\rho_\theta$ by back-rotating the resonance wavefunction: $\Psi_{\theta,BR}(r) = e^{-i3\theta/2}\frac{u_\theta(e^{-i\theta}r)}{e^{-i\theta}r}$ to recover the Gamow state, then computing the density with the standard delta function.
 \subsection{Radius squared operator ($r^2$)}
 $\langle r^2\rangle_\phi$ is radius squared operator of CS'd state $\psi_\phi$. $r\rightarrow \exp(i\phi) r$, so
 $$
