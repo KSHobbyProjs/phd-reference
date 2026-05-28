@@ -1,7 +1,9 @@
 \section{Background}
 
-\subsection{Separation of center of mass}
-\subsubsection{Deriving the TISE from the TDSE}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TISE FROM TDSE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Deriving the TISE from the TDSE}
 The time evolution operator obeys the time-dependent Schr{\"o}dinger (TDSE):
 \be 
 	i\hbar \;\frac{\partial}{\partial t} \hat{U}(t, t_0) = \hat{H}\hat{U}(t, t_0)\label{eq:tdse1}.
@@ -31,54 +33,210 @@ Now, we restrict \cref{eq:tdse2} to a single energy eigenspace. In that eigenspa
 \end{align*}
 This approach derives the time-independent Schr{\"o}dinger equation (TISE) from abstract operator algebra, which is more general than the standard approach: starting with the TDSE and using the position basis, the assumption that $H$ doesn't depend on $t$, and separation of variables to arrive at the same equation.
 
-\subsubsection{Separating out the center of mass}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SEP OF CM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Separating out the center of mass}
 Consider a two-particle system where the particles have masses $m_1$ and $m_2$ and the particles' positions are $\bm{r}_1$ and $\bm{r}_2$. We can define the center of mass and relative coordinate as
 \bea
 	\bm{R} = \frac{m_1\bm{r}_1 + m_2\bm{r}_2}{m_1+m_2}\quad \bm{r} = \bm{r}_1 - \bm{r}_2,
 \eea
-respectively. If the potential is central, one can then show that the Hamiltonian factorizes and the center of mass motion is independent of the relative motion. The center of mass just contributes an overall free motion and can be neglected (moving to the center of mass frame).
+respectively. Then, $\frac{\partial}{\partial r_{ij}}=\frac{\partial r_k}{\partial r_{ij}}\frac{\partial}{\partial r_k} + \frac{\partial R_k}{\partial r_{ij}}\frac{\partial}{\partial R_k}$ (where $r_{ij}$ is the $j$-th coordinate of the $i$-th particle, and Einstein summation convention has been adopted). Thus,
+\begin{align*}
+    \frac{\partial}{\partial r_{ij}} &= (-1)^{i-1}\delta_{jk}\frac{\partial}{\partial r_k} + \frac{m_i}{M}\delta_{jk}\frac{\partial}{\partial R_k}\\
+                                     &= (-1)^{i-1}\frac{\partial}{\partial r_j} + \frac{m_i}{M}\frac{\partial}{\partial R_j}.
+\end{align*}
+So, $\nabla_{\mathbf{r_i}}=(-1)^{i-1}\nabla_{\mathbf{r}} + \frac{m_i}{M}\nabla_{\mathbf{R}}$, where $M=m_1+m_2$. Thus,
+\begin{align*}
+    \nabla^2_{\mathbf{r_1}}&=\nabla_{\mathbf{r}}^2 + 2\frac{m_1}{M} \nabla_{\mathbf{r}}\cdot\nabla_{\mathbf{R}} + \left(\frac{m_1}{M}\right)^2\nabla^2_{\mathbf{R}}\\
+    \nabla^2_{\mathbf{r_2}}&=\nabla_{\mathbf{r}}^2-2\frac{m_2}{M}\nabla_{\mathbf{r}}\cdot\nabla_{\mathbf{R}} + \left(\frac{m_2}{M}\right)^2\nabla^2_{\mathbf{R}}.
+\end{align*}
+Then, the kinetic energy operator in position space becomes:
+\begin{align*}
+    T^{\text{pos}} &= -\frac{\hbar^2}{2m_1}\nabla^2_{\mathbf{r_1}} - \frac{\hbar^2}{2m_2}\nabla^2_{\mathbf{r_2}} \\
+            &= -\frac{\hbar^2}{2}\left\{ \left(\frac{1}{m_1}+\frac{1}{m_2}\right)\nabla^2_{\mathbf{r}} + \left(\frac{m_1+m_2}{M^2}\right) \nabla_{\mathbf{R}}^2\right\} \\
+            &= -\frac{\hbar^2}{2\mu}\nabla_{\mathbf{r}}^2 -\frac{\hbar^2}{2M}\nabla^2_{\mathbf{R}}.\\
+\end{align*}
+Or, in operator form:
+\begin{align*}
+    \hat{T}= \hat{T}_{\text{rel}} &+ \hat{T}_{\text{CM}} \quad\text{with}\\
+    \hat{T}_\text{rel}=\frac{\vecop{p}^2}{2\mu}\quad&\text{and}\quad\hat{T}_{\text{CM}}=\frac{\vecop{P}^2}{2M}
+\end{align*}
+where $\mu =\frac{m_1m_2}{M}$ is the reduced mass. If the potential only depends on the relative coordinate, then the Hamiltonian takes the form:
+\begin{align*}
+    \hat{H} & = \hat{T} + \hat{V} \\
+            & = \frac{\mathbf{p_1}^2}{2m_1}+\frac{\mathbf{p_2}^2}{2m_2} + \hat{V}(\vecop{r})\\
+            &= \hat{H}_{\text{rel}} + \hat{H}_{\text{CM}}, \quad\text{where}
+\end{align*}
+\begin{align}
+    \hat{H}_\text{rel}&=\frac{\vecop{p}^2}{2\mu}+\hat{V}(\vecop{r})\quad\rightarrow\quad H^{\text{pos}}_\text{rel}=-\frac{\hbar^2}{2\mu}\nabla^2_{\mathbf{r}}+V(r)\label{eq:ham_rel}\\ 
+    \hat{H}_\text{CM}&=\frac{\vecop{P}^2}{2M}\quad\rightarrow\quad H^{\text{pos}}_\text{CM}=-\frac{\hbar^2}{2M}\nabla^2_{\mathbf{R}}\nonumber.
+\end{align}
+This means that the Hamiltonian splits into two independent terms, one acting strictly on the center of mass coordinate and one acting strictly on the relative coordinate. So, the wavefunction factorizes as $\Psi(\mathbf{r}, \mathbf{R}) = \psi(\mathbf{r})\phi(\mathbf{R})$. The center of mass wavefunction includes no potential and thus evolves freely. The relative coordinate wavefunction is the only part that's affected by the potential and is thus the only part that carries the relevant physics. 
 
-\subsubsection{Separating out angular motion}
-From this, we can then separate out angular motion using the definition of the angular momentum operator. The potential is central, so the Hamiltonian commutes with the angular momentum operator. This means that there are simultaneous eigenkets of both. Angular momentum eigenstates are spherical harmonics and are degenerate. Diagonalizing the radial Hamiltonian in the degenerate eigenspace of angular momentum $l$, we get the reduced radial equation:
+From the above arguments, one can see that the cancellation of the cross terms between $\mathbf{r}$ and $\mathbf{R}$ is what allows the kinetic energy operator to be factorized, allowing us to separate out the center of mass motion from the relative motion.
+
+\subsubsection{Tensor product structure:}
+To make the tensor product structure explicit, note that it has been implicit from the outset: the two-particle Hilbert space is $\mathcal{H}=L^2(\mathbb{R}^3_{\mathbf{r}_1})\otimes L^2(\mathbb{R}^{3}_{\mathbf{r}_2})$, so states can be written as $|\Psi\rangle = \sum_{i,j}c_{ij}|\psi_i\rangle\otimes|\phi_j\rangle$ $\rightarrow$ $\Psi(\mathbf{r}_1, \mathbf{r}_2)=\sum_{i,j}c_{ij}\psi_i(\mathbf{r}_1)\phi_j(\mathbf{r}_2)$. The Hamiltonian is 
+\begin{align*}
+    \hat{H} &= \hat{T}_{\mathbf{r}_1}\otimes \mathbb{I} + \mathbb{I}\otimes \hat{T}_{\mathbf{r}_2} + \hat{V}(\hat{\mathbf{r}}_1\otimes\mathbb{I}-\mathbb{I}\otimes \hat{\mathbf{r}}_2).
+\end{align*}
+We introduce a coordinate change on $\mathbb{R}^6$: $(\mathbf{r}_1, \mathbf{r}_2)\rightarrow(\mathbf{r}, \mathbf{R})$. This is a diffeomorphism under which the above calculation shows that $\hat{H}$ transforms to 
+\begin{align*}
+    \hat{H}&= \hat{T}_{\mathbf{R}}\otimes \mathbb{I} + \mathbb{I}\otimes(\hat{T}_{\mathbf{r}} + \hat{V}_{\mathbf{r}})\\
+    &=\hat{H}_{\text{CM}}\otimes\mathbb{I} + \mathbb{I}\otimes \hat{H}_{\text{rel}}.
+\end{align*}
+where $\hat{H}_{\text{CM}}$ acts solely on $L^2(\mathbb{R}^3_{\mathbf{R}})$ and $\hat{H}_{\text{rel}}$ acts solely on $L^2(\mathbb{R}^3_{\mathbf{r}})$. Thus, the Hilbert space factorizes as $\mathcal{H}\cong L^2(\mathbb{R}^3_{\mathbf{r}})\otimes L^2(\mathbb{R}^3_{\mathbf{R}})$, and $\hat{H}$ respects this factorization.\\
+
+\subsubsection{Extension to \texorpdfstring{$n$} particles:}
+This extends to $n$ particles via Jacobi coordinates. The kinetic energy $\hat{T}=\sum_i \frac{\hat{\mathbf{p}}_i^2}{2m_i}$ defines a quadratic form on momentum space with Gram matrix $G_{ij}=\frac{1}{m_i}\delta_{ij}$ (this is just the inverse mass matrix $M=\text{diag}(m_1, \dots, m_n)$). Define a set of linear transformations of the coordinates: $\mathbf{q}_\alpha=\sum_i J_{\alpha i}\mathbf{r}_i$ with $J_{\alpha i} = \frac{\partial \mathbf{q}_\alpha}{\partial \mathbf{r}_i}$ constant. We can do this because we're asserting that we have a linear transformation. If we didn't, the Jacobian would be position-dependent, and the following arguments fall apart. Further, we assume that the Jacobian is non-degenerate, meaning that the coordinate transformation we define produces $n$ new, independent coordinates with no redundancy. Thus, $\mathbf{J}$ is invertible, and $\mathbf{q}=\mathbf{J r}$ and $\mathbf{r}=\mathbf{J}^{-1}\mathbf{q}$ (where $\mathbf{q},\mathbf{r}\in\mathbb{R}^{3n}$). The transformation is linear with constant coefficients, so gradients transform as $\nabla_{\mathbf{r}_\alpha}=\sum_i J_{\alpha i} \nabla_{\mathbf{q}_i}$. Thus,
+\begin{align*}
+    \hat{T}=\sum_i \frac{\hat{\mathbf{p}}_i^2}{2m_i} \rightarrow T^\text{pos}&= -\frac{\hbar^2}{2}\sum_i\frac{1}{m_i}\left(\sum_j J_{ij} \nabla_{\mathbf{q}_j}\right)^2\\
+    &=-\frac{\hbar^2}{2}\sum_i \frac{1}{m_i}\left( \sum_{j} J_{ij}\nabla_{\mathbf{q}_j}\cdot\sum_k J_{ik}\nabla_{\mathbf{q}_k}\right)\\
+    &= -\frac{\hbar^2}{2}\sum_{jk}\left(\sum_i \frac{J_{ij}J_{ik}}{m_i} \right)\nabla_{\mathbf{q}_j}\cdot\nabla_{\mathbf{q}_k}\\
+    &= -\frac{\hbar^2}{2}\sum_{jk} M_{jk}\nabla_{\mathbf{q}_j}\cdot\nabla_{\mathbf{q}_k}= -\frac{\hbar^2}{2} \nabla_{\mathbf{q}}^T\mathbf{M}\nabla_{\mathbf{q}},
+\end{align*}
+where $M_{jk}=\sum_iJ_{ij}J_{ik}/m_i=(\mathbf{J}^T \mathbf{G J})_{jk}$ is the effective mass matrix. If the kinetic energy factorizes in our new coordinate system, $\mathbf{M}$ should be diagonal. This would immediately mean that the cross terms $\nabla_{\mathbf{q}_j}\cdot\nabla_{\mathbf{q}_k}$ don't contribute. We can then choose a $\mathbf{J}$ for which this follows. Here's the procedure: for $n$ particles,
+\begin{enumerate}
+    \item Treat particles 1 and 2 as a subsystem, replace them with their CM and relative coordinate. This reduces the $n$ particle system to an $(n-1)$ particle system (the one relative coordinate is now done; we have left the subsystem CM plus the remaining $(n-2)$ particles).
+    \item Apply the same two-particle argument to the next pair (the subsystem CM and $r_3$), and so on.
+    \item Repeat iteratively until all particles are swept over.
+\end{enumerate}
+The inductive construction works because at each step, the two-particle calculation guarantees diagonalization of that block, and since the steps involve different degrees of freedom, no cross terms are introduced between blocks. Moving through inductively through the entire set of coordinates diagonalizes all blocks, and, by the end, we'll have the full center of mass coordinate of the system, $\mathbf{R}$ and $(n-1)$ relative coordinates $\{\mathbf{\rho}_k\}_i^{n-1}$. The induction closes because the two-particle case is already proved. Thus, the kinetic energy can always be made to factorize out the center of mass motion. If the potential only depends on $\mathbf{\rho}_k$, then the full Hamiltonian similarly factorizes.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SEP OF ANG MOM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Separating out Angular Motion}
+\subsubsection{Overview of Angular Momentum:}
+Angular momentum $\hat{\mathbf{J}}$ is defined as the generator of rotations. An infinitesimal rotation by angle $\delta\phi$ about axis $\vecop{n}$ acts on states as
+\bea
+    U(\delta\phi) = 1 - \frac{i}{\hbar}\delta\phi\vecop{n}\cdot\vecop{J},
+\eea
+with $\vecop{J}$ Hermitian. This expression so far doesn't restrict the form of $\vecop{J}$; it's just the general form of an infinitesimal transformation operator $U_\epsilon=1-i\hat{G}\epsilon$ ($\hat{G}$ Hermitian) that follows from requiring that the transformation be unitary and has certain Lie group properties \footnote{
+These conditions are as follows: 
+\begin{enumerate}
+    \item $U(0)=1$ (identity at zero transformation).
+    \item $U(\epsilon_1+\epsilon_2)=U(\epsilon_1)U(\epsilon_2)$ (group composition). This condition along with condition 1 imply $U(-\epsilon)=U^{-1}(\epsilon)$ (inverse).
+    \item Smoothness / differentiability in $\epsilon$ near $\epsilon=0$. This justifies the generator form for finite transformations: $U(\phi)=\exp(-iG\phi)$.
+    \item $U^\dagger U=1$ (unitarity).
+\end{enumerate}
+The first two are just general group properties. The third is a property that Lie groups must follow, and the final condition, unitarity, is a separate condition all together required to conserve probability. Further, it should be noted that these are not the complete conditions for a Lie group. These are just the sufficient conditions for defining a general infinitesimal transformation operator in quantum mechanics. 
+} ($\hat{G}\rightarrow p_x/\hbar, \epsilon\rightarrow dx'$ for infinitesimal translation by $dx'$ in the $x$ direction, for instance). The next step is to restrict the form of $\hat{G}$ given the specific nature of the transformation. For us, this means using the general properties of rotations to restrict the form of $\vecop{J}$. We require that $U$ obeys the same composition rules as classical rotations (namely, the non-commutativity of rotations about different axes). Demanding this restriction on $U$, we find $[\hat{J}_i, \hat{J}_j]=i\hbar \epsilon_{ijk}\hat{J}_k$. This is the Lie algebra $\mathfrak{so}(3)\cong \mathfrak{su}(2)$ (the Lie algebra of $SO(3)$ and its double cover $SU(2)$). Really, this can be thought of as the \textit{definition} of rotations. We arrived at this by demanding that $U$ obeys the same rules as classical rotations, but one can also view infinitesimal rotations as being fundamentally defined by this Lie algebra. Classical rotations don't include spin ($SO(3)$ and not $SU(2)$), yet quantum mechanics does. Spin is a representation of this same Lie algebra. The Lie algebra was motivated by the behavior of classical rotations, but it includes representations that have no classical analogue.\\
+
+This Lie algebra defines everything about rotations, regardless of representation or basis. From this structure alone, we can prove that $[\vecop{J}^2, \hat{J}_k]=0$ for any one $k$. Thus, $\vecop{J}^2$ and $\hat{J}_k$ are simultaneously diagonalizable with simultaneous eigenkets $|j, m\rangle$ ($[\hat{J}_i,\hat{J}_j]\ne 0$ when $j\ne i$, so we can't simultaneously diagonalize all components of angular momentum at once. We can only add one component to our commuting set). Using ladder operators, we can further show that $m=-j, -j+1, \dots,0, \dots,j-1,j$; $\vecop{J}^2|j, m\rangle=\hbar^2j(j+1)|j,m\rangle$; and $\hat{J}_k|j,m\rangle = \hbar m|j,m\rangle$ (i.e., the $\hat{J}_z$ spectrum is discrete with eigenvalues determined by the eigenvalue of $\vecop{J}^2$). Further, this establishes that each $j$-eigenspace of $\vecop{J}^2$ is $(2j+1)$-fold degenerate, and $\hat{J}_z$ resolves this degeneracy. Since $[\vecop{J}^2, \hat{J}_k]=0$ guarantees $\hat{J}_k$ maps each $j$-subspace to itself, we can diagonalize $\hat{J}_k$ within each block independently, yielding the unique simultaneous eigenbasis $|j, m\rangle$ without mixing different $j$ values. The ladder operator derivation hinted at above is precisely doing this simultaneous diagonalization procedure in disguise.\\
+
+Spin, $\vecop{S}$, is one example of an angular momentum operator (meaning it satisfies the angular momentum commutation relations). It corresponds to half-integer-$j$ irreps of $\mathfrak{su}(2)$, and generates $SU(2)$ transformations acting on spinor space $\mathbb{C}^2$ (see \cref{appendix:groups} for a brief overview of Lie group structure). This type of rotation has no interpretation as rotations of physical $\mathbb{R}^3$. Orbital angular momentum, $\vecop{L}=\vecop{x}\times\vecop{p}$, is another example. It corresponds to integer-$j$ irreps of $\mathfrak{su}(2)\cong\mathfrak{so}(3)$, and generates $SO(3)$ transformations acting on $\mathbb{R}^3$ (rotations of physical space)\footnote{
+There are two ways to arrive at this expression. (1) Take it as a definition. (2) Require that $\vecop{L}$ must generate rotations of the position eigenbasis itself: $|\mathbf{x}\rangle\rightarrow|R\mathbf{x}\rangle$. This is a special restriction because the position eigenkets aren't true states in the Hilbert space. They're generalized states in the Gelfand triple. So, requiring $\vecop{L}$ rotate these states just as it does rotate normal states in the Hilbert space forces $\vecop{L}$ to take a specific form: Taylor expand $\langle \mathbf{x}|U(\delta\phi)|\psi\rangle\approx\psi(\mathbf{x}-\delta\phi\vecop{n}\times\mathbf{x})$ and compare this to the generator expression $U(\delta\phi)|\psi\rangle=(1-\frac{i}{\hbar}\delta\phi\vecop{n}\cdot\vecop{L})|\psi\rangle$. This immediately implies $\vecop{L}=\vecop{x}\times\vecop{p}$. One more restriction: since $\mathbf{x}$ are in $\mathbb{R}^3$, a $2\pi$ rotation should return every $\mathbf{x}$ to itself. As such, only integer-$j$ irreps of $\mathfrak{su}(2)$ are admitted: the $l$ eigenvalue is restricted to integers (this is easy to see by writing the finite rotation transformation, $\exp(-i\vecop{L}\cdot\vecop{n}\phi/\hbar)$, and noting that this must return to the identity transformation at $\phi=2\pi$. In the $|l,m\rangle$ basis, this operator acts as $e^{-im\phi}$ (assuming $\vecop{n}$ points along the quantization axis; i.e., the axis which the quantum number $m$ is defined for). Then, for $e^{-i2\pi m}=1\;\forall\; m$, $m\in\mathbb{Z}$, and since $m\in\{-l, \dots, l\}$, $l\in\mathbb{Z}$). 
+}. One can show using the definition $\vecop{L}=\vecop{x}\times\vecop{p}$ that, in position space, 
+\begin{align}
+    &\langle \mathbf{x}| \vecop{L}|\psi\rangle = -i\hbar(\mathbf{x}\times\nabla)\langle \mathbf{x}|\psi\rangle\nonumber \\
+    \rightarrow& \langle \mathbf{x}|\vecop{L}^2|\psi\rangle = -\hbar^2\nabla^2_{\Omega}\langle\mathbf{x}|\psi\rangle\label{eq:angmom-positionrep}.
+\end{align}
+These expressions can be used to find the simultaneous eigenvectors of $\vecop{L}^2$ and $\hat{L}_z$ in the position basis: the spherical harmonics, $\langle \mathbf{x}|l,m\rangle=Y^m_l(\Omega_{\mathbf{x}})$. It's important to note that these eigenfunctions are established completely independently from any Hamiltonian. Their form is completely determined by the structure of $\vecop{L}$, which has nothing to do with $\hat{H}$.
+
+\subsubsection{Finding Simultaneous Eigenkets}
+Now, if $[\vecop{L}, \hat{H}]=0$, $[\hat{H}, \vecop{L}^2]=0$ and $[\hat{H}, \hat{L}_k]=0$, so one can simultaneously diagonalize $\hat{H}$, $\vecop{L}^2$, and $\hat{L}_k$ to find simultaneous eigenkets $|n, l, m\rangle$ where $n$ corresponds to the energy eigenvalue. Note that $[\hat{H}, \vecop{L}^2]=[\hat{H}, \hat{L}_k]=0$ alone says nothing about how the energy spectrum specified by $n$ relates to $l$ or $m$ (if there exists a relationship at all), if the energy spectrum is discrete, or if the energy spectrum is degenerate. However, $[\vecop{L}, \hat{H}]=0$, from which we derived $[\vecop{L}^2, \hat{H}]=[\hat{L}_z,\hat{H}]=0$, does. $[\hat{H},\vecop{L}]=0\rightarrow [\vecop{L}_{\pm},\hat{H}]=0$. Thus, if $|n,l,m\rangle$ is an eigenvector of $\hat{H}$ with eigenvalue $E_{n,l,m}$, then
+\begin{align*}
+    \hat{H}\vecop{L}_+|n,l,m\rangle = \vecop{L}_+\hat{H}|n,l,m\rangle = E_{n,l,m}\vecop{L}_+|n,l,m\rangle.
+\end{align*} 
+So, $\vecop{L}_+|n,l,m\rangle\propto|n,l,m+1\rangle$ is also an eigenvector with the same energy $E_{n,l,m}$ (an analogous argument can be made using $\vecop{L}_-$). So, the energy is completely independent of $m$, and we should label our energy eigenvalues by $E_{n,l}$. I.e., the energy spectrum includes a $(2l+1)$-fold degeneracy that it inherits from $\vecop{L}^2$. Still, we know nothing of if the energy spectrum is discrete or if it's related to $l$, only that it cannot depend on $m$.\\
+
+ For standard one-particle Hamiltonians of the form $\hat{H}=\frac{\vecop{p}^2}{2m} + V(r)$, $[\vecop{L}, \hat{H}]=0$ if the potential is spherically symmetric, $[\hat{L},\hat{V}]=0$, since the kinetic energy is already spherically symmetric, $[\vecop{L}, \hat{T}]=0$. For one particle, this amounts to requiring that the potential $V$ is central. For $n$ particles, the argument is as follows: we define the orbital angular momentum of the $k$-th relative coordinate as $\vecop{L}_{\mathbf{\rho}_k} = \vecop{\rho}_k\times \vecop{p}_{\mathbf{\rho}_k}$ and the orbital angular momentum of the center of mass as $\vecop{L}_{\text{CM}} = \vecop{R} \times \vecop{P}$. Then, we can further define $\vecop{L}_{\text{rel}}=\sum_k \vecop{L}_{\mathbf{\rho}_k}$. $[\hat{H}_{\text{CM}},\vecop{L}_{\text{CM}}]=0$ trivially (since the center of mass is always free). $[\vecop{L}_\text{rel},\hat{T}_\text{rel}]=0$ for the same reason as the one-particle case: $\hat{T}_\text{rel}=\sum_k \hat{T}_{\mathbf{\rho}_k}$, and $[\vecop{L}_{\mathbf{\rho}_k},\hat{T}_{\mathbf{\rho}_k}]=0$, so $[\vecop{L}_{\text{rel}}, \hat{T}_{\text{rel}}]=\sum_{i,j}[\vecop{L}_{\mathbf{\rho}_i},\hat{T}_{\mathbf{\rho}_j}]=0.$\footnote{
+For $i\ne j$, $[\vecop{L}_{\mathbf{\rho}_i}, \hat{T}j_{\mathbf{\rho}_j}]=0$ because the operators are acting on different Jacobi coordinates. For $i=j$, $[\vecop{L}_{\mathbf{\rho}_i},\hat{T}_{\mathbf{\rho}_i}]=0$ by the same argument as the one-particle case.
+}
+If $\hat{V}(\{\vecop{x}_k\}_k)$ is completely rotationally invariant -- i.e., if $V(R\mathbf{x}_1, R\mathbf{x}_2, \dots, R\mathbf{x}_n)=V(\mathbf{x}_1, \dots, \mathbf{x}_n)\;\forall\; R\in SO(3)$ (a sufficient but not necessary condition for this to hold is that $V$ depends only on pairwise separations $|\mathbf{x}_i-\mathbf{x}_j|$) -- then $[\hat{H}_{\text{rel}},\vecop{L}_{\text{rel}}]=0$. In this case, $\vecop{L}_{\text{tot}}:=\vecop{L}_{\text{CM}}\otimes \mathbb{I}+\mathbb{I}\otimes\vecop{L}_{\text{rel}}$ commutes with $\hat{H}$ because
+\begin{align*}
+    [\hat{H}, \vecop{L}_\text{tot}] &= [\hat{H}_{\text{CM}}\otimes \mathbb{I}+\mathbb{I}\otimes \hat{H}_{\text{rel}}, \vecop{L}_{\text{CM}}\otimes\mathbb{I} + \mathbb{I}\otimes \vecop{L}_{\text{rel}}]\\
+    &= [\hat{H}_{\text{CM}}, \vecop{L}_{\text{CM}}] \otimes \mathbb{I} + [\hat{H}_\text{CM}\otimes \mathbb{I}, \mathbb{I}\otimes \vecop{L}_\text{rel}]+[\mathbb{I}\otimes \hat{H}_\text{rel}, \vecop{L}_\text{CM}\otimes \mathbb{I}] + \mathbb{I}\otimes[\hat{H}_{\text{rel}},\vecop{L}_\text{rel}]\\
+    &= 0 + 0 + 0 + 0 = 0.
+\end{align*}
+Lastly, we note that, while we defined $\vecop{L}_{\text{tot}}$ as the sum of the center of mass angular momentum and the relative angular momentum, the more fundamental definition is $\vecop{L}_\text{tot}=\sum_i \vecop{x}_i\times\vecop{p}_i$ (the sum over angular momentum for each particle, as in classical mechanics). However, because the Jacobi transformation is a canoncial transformation,
+\bea
+    \vecop{L}_\text{tot}=\sum_i \vecop{x}_i\times \vecop{p}_i = \vecop{R}\times \vecop{P} + \sum_k \vecop{\rho}_k\times \vecop{p}_{\mathbf{\rho}_k}.
+\eea
+(the cross terms cancel). Thus, the two definitions are equivalent.\\
+
+For $n=2$ particles, the above results are nice because the relative angular momentum is just the angular momentum of the one relative coordinate, and the problem reduces to an effective one-particle problem. Thus, restating the main points: since $[\hat{H}_\text{rel},\vecop{L}_\text{rel}^2]=[\hat{H}_\text{rel},\hat{L}_{\text{rel},z}]=[\vecop{L}^2_\text{rel}, \hat{L}_{\text{rel},z}]=0$, $\hat{H}_{\text{rel}}$ is block diagonal in the $|l,m\rangle$ basis (meaning $\hat{H}_\text{rel}$ doesn't mix different $(l,m)$ states), and we can label energy eigenkets as simultaneous eigenkets $|n,l,m\rangle$ of $\hat{H}_\text{rel}, \vecop{L}^2_\text{rel},$ and $\hat{L}_{\text{rel},z}$. We now proceed to solve for these eigenkets. First, letting $\mathbf{r}$ be the relative coordinate and $r=|\mathbf{r}|$, recall the relative Hamiltonian from \cref{eq:ham_rel}:
+\bea
+    \hat{H}_\text{rel} = \frac{\vecop{p}^2}{2\mu}+\hat{V}(\vecop{r})\rightarrow H_\text{rel}^\text{pos}=-\frac{\hbar^2}{2\mu}\nabla^2_\mathbf{r}+V(r).
+\eea
+Since $\nabla^2_{\mathbf{r}} = \nabla^2_r + \nabla_{\Omega}/r^2$,
+\begin{align*}
+    H^{\text{pos}}_{\text{rel}} &= -\frac{\hbar^2}{2\mu}\nabla^2_\mathbf{r}+V(r) \\
+    &= -\frac{\hbar^2}{2\mu}\nabla^2_r-\frac{\hbar^2}{2\mu r^2}\nabla^2_{\Omega} + V(r).
+\end{align*}
+Using \cref{eq:angmom-positionrep}, we can relate this to the angular momentum operator by pulling back to the operator formalism:
+\begin{align*}
+    H_\text{rel}^{\text{pos}}\psi_{n,l,m}(\mathbf{r}) &= \left(-\frac{\hbar^2}{2\mu}\nabla^2_r-\frac{\hbar^2}{2\mu r^2}\nabla^2_{\Omega} + V(r)\right)\langle\mathbf{r}|n,l,m\rangle\\
+    &= \frac{1}{2\mu}\langle\mathbf{r}|\vecop{p}^2_{r}|n,l,m\rangle +\frac{1}{2\mu}\langle\mathbf{r}|\vecop{L}^2\vecop{r}^{-2}|n,l,m\rangle+\langle \mathbf{r}|\hat{V}(\vecop{r})|n,l,m\rangle\\
+    &= \langle \mathbf{r}|\left(\frac{\vecop{p}^2_r}{2\mu}+\frac{\vecop{L}^2}{2\mu\vecop{r}^2} + \hat{V}(\vecop{r})\right)|n,l,m\rangle\\
+    &=\langle \mathbf{r}|\hat{H}_\text{rel}|n,l,m\rangle\quad\text{with}\\
+    \hat{H}_\text{rel}&=\frac{\vecop{p}^2}{2\mu}+\hat{V}(\vecop{r})=\frac{\vecop{p}^2_r}{2\mu}+\frac{\vecop{L}^2}{2\mu\vecop{r}^2}+\hat{V}(\vecop{r}),
+\end{align*}
+where $\vecop{p}_r\rightarrow\mathbf{p}_r^\text{pos}=-i\hbar\nabla_r$ is the radial momentum operator. Now, $r$ and $\Omega_{\mathbf{r}}$ are independent coordinates spanning $\mathbb{R}^3$. As such, the Hilbert space factorizes into a radial and an angular part: $\mathcal{H}=L^2(\mathbb{R}^3)\cong L^2(\mathbb{R}_{>0},r^2dr)\otimes L^2(S^2)=\mathcal{H}_r\otimes\mathcal{H}_\Omega$, and every state in $\mathcal{H}$ lives in this tensor product space\footnote{
+This isn't trivial; it's the result of the following theorem: for two $\sigma$-finite measure spaces $(X, \mu_X)$ and $(Y, \mu_Y)$, $L^2(X\times Y, \mu_X\otimes \mu_Y)\cong L^2(X,\mu_X)\otimes L^2(Y, \mu_Y)$. In words, the space of square-integrable functions on a product space is isomorphic to the tensor product of the individual $L^2$ spaces, meaning any square-integrable function $f(x,y)$ can be written as a countable sum $\sum_i f_i(x)g_i(y)$ converging in the $L^2$ norm. The key condition is that the measure factorizes as a product measure: $d\mu_{X\times Y}=d\mu_X\otimes d\mu_Y$. For $\mathbb{R}^3$ in spherical coordinates, $\mathbb{R}^3=\mathbb{R}_{>0}\times S^2$, $d\mu_{\mathbb{R}_{>0}}=r^2dr$, $d\mu_{S^2}=d\Omega$, and $d\mu_{\mathbb{R}_{>0}\times S^2}=d\mu_{\mathbb{R}_{>0}}\otimes d\mu_{S^2}=r^2drd\Omega$. This is a result of functional analysis and measure theory, not quantum mechanics, but we put this here for completeness.
+}. Thus, $|n,l,m\rangle$ will be some superposition of product states between states in the radial sector of the Hilbert space and states in the angular sector of the Hilbert space (though, we will see that the structure constrains it further)\footnote{A general state in a tensor product space $\mathcal{H}=\mathcal{H}_A\otimes\mathcal{H}_B$ has the form $|\psi\rangle=\sum_{i,j}c_{ij}|a_i\rangle\otimes |b_j\rangle$, where $\{a_i\}_i$ and $\{b_i\}_i$ are bases for the $A$ and $B$ sectors, respectively. In our case, this sum becomes an integral since the basis for the radial and angular sectors of $\mathcal{H}$ are continuous: $|\psi\rangle=\int d\Omega\int r^2\,dr\; \psi(r, \Omega)|r\rangle\otimes|\Omega\rangle$.
+}. From \cref{eq:angmom-positionrep}, we see that $\vecop{L}^2$ acts only on the angular sector, and this is the case for $\hat{L}_z$ as well ($\langle \mathbf{x}|\hat{L}_z|\psi\rangle=-i\hbar\frac{\partial}{\partial\phi}\langle\mathbf{x}|\psi\rangle$). Thus, $\vecop{L}^2$ acts as $\mathbb{I}\otimes \vecop{L}^2$ on the Hilbert space and $\hat{L}_z$ acts as $\mathbb{I}\otimes \hat{L}_z$ on the Hilbert space. The $l$-eigenspace of $\mathbb{I}\otimes \vecop{L}^2$ is $\mathcal{H}_r\otimes\mathcal{E}_l$ (where $\mathcal{E}_l$ is just the $l$-eigenspace of $\vecop{L}^2$). The $m$-eigenspace of $\mathbb{I}\otimes \hat{L}_z$ is $\mathcal{H}_r\otimes \mathcal{E}_m$ (where $\mathcal{E}_m$ is just the $m$-eigenspace of $\hat{L}_z$). Thus, the joint $l,m$-eigenspace of $\mathbb{I}\otimes\vecop{L}^2$ and $\mathbb{I}\otimes\hat{L}_z$ is $\mathcal{H}_r\otimes(\mathcal{E}_l\;\cap\;\mathcal{E}_m) = \mathcal{H}_r\otimes\text{span}(|l,m\rangle)$. The angular factor is just the $|l,m\rangle$ simultaneous eigenket of $\vecop{L}^2$ and $\hat{L}_z$, as we expect. Thus, $|n,l,m\rangle$ factorizes as a pure product state, $|n,l,m\rangle=|n,l,m\rangle_\text{rad}\otimes|l,m\rangle$, where $|n,l,m\rangle_\text{rad}$ is the part of $|n,l,m\rangle$ that lies in the radial sector, and $|l,m\rangle$, the simultaneous eigenvector of $\vecop{L}^2$ and $\hat{L}_z$, lies completely in the angular sector. Applying this to the TISE\footnote{
+One might wonder why the tensor-product structure of the Hilbert space didn't need to be made explicit from the beginning. After all, we initially wrote states as $|n,m,l\rangle$ and operators as $\vecop{L}^2$, rather than as tensor-product objects like $|\psi\rangle_r\otimes|l,m\rangle$ or $\mathbb{I}_r\otimes\vecop{L}^2$. Did we begin with a reduced version of the problem and only later discover additional structure? No. The tensor-product structure was already present implicitly in the fact that the configuration space factorizes into independent coordinates. No new mathematical structure or physics was introduced; we just made explicit a decomposition that was already encoded in the geometry of the problem. In most elementary treatments, this structure remains implicit because the radial and angular degrees of freedom are already built into the coordinate system itself, so writing explicit tensor products adds little computationally. Separation of variables is precisely the process of exploiting this hidden factorization. This should be contrasted with systems involving genuinely distinct degrees of freedom, such as spatial and spin degrees of freedom. There, the tensor-product structure will not remain implicit because operators may couple different sectors of the Hilbert space nontrivially, making expressions like $|\Psi\rangle=|\psi\rangle_\text{space}\otimes|\chi\rangle_\text{spin}$ and $\hat{A}=\hat{A}_\text{space}\otimes \hat{A}_\text{spin}$ essential rather than just interpretational.
+}.:
+\begin{align*}
+    &\hat{H}_\text{rel}|n,l,m\rangle = E_{n,l}|n,l,m\rangle\\
+    \rightarrow&\left(\frac{\vecop{p}^2_r\otimes\mathbb{I}}{2\mu}+\frac{1}{2\mu}\frac{1}{\vecop{r}^2}\otimes\vecop{L}^2+\hat{V}(\vecop{r})\otimes\mathbb{I}\right)\left(|n,l,m\rangle_\text{rad}\otimes|l,m\rangle  \right) = E_{n,l}(|n,l,m\rangle_\text{rad}\otimes|l,m\rangle)\\
+    \rightarrow&\frac{1}{2\mu}\vecop{p}^2_r|n,l,m\rangle_\text{rad}\otimes |l,m\rangle+\frac{1}{2\mu}\frac{1}{\vecop{r}^2}|n,l,m\rangle_\text{rad}\otimes \vecop{L}^2|l,m\rangle + \hat{V}(\vecop{r})|n,l,m\rangle_\text{rad}\otimes|l,m\rangle\\
+    &\hspace{250pt}=E_{n,l}(|n,l,m\rangle_\text{rad}\otimes|l,m\rangle)\\
+    &\rightarrow \frac{\vecop{p}^2_r}{2\mu}|n,l,m\rangle_\text{rad}\otimes|l,m\rangle + \frac{\hbar^2l(l+1)}{2\mu\vecop{r}^2}|n,l,m\rangle_\text{rad}\otimes|l,m\rangle + \hat{V}(\vecop{r})|n,l,m\rangle_\text{rad}\otimes|l,m\rangle\\
+    &\hspace{250pt}=E_{n,l}|n,l,m\rangle_\text{rad}\otimes|l,m\rangle.
+\end{align*}
+Projecting onto $\mathbb{I}\otimes\langle l,m|$ (now that we've isolated the $(l,m)$-block, we project out the $l,m$ eigenvector):
+\begin{align*}
+    &\frac{\vecop{p}^2_r}{2\mu}|n,l,m\rangle_\text{rad}\langle l,m|l,m\rangle + \frac{\hbar^2l(l+1)}{2\mu\vecop{r}^2}|n,l,m\rangle_\text{rad}\langle l,m|l,m\rangle + \hat{V}(\vecop{r})|n,l,m\rangle_\text{rad}\langle l,m|l,m\rangle\\
+    &\hspace{250pt}E_{n,l}|n,l,m\rangle_\text{rad}\langle l,m|l,m\rangle\\
+    \rightarrow&\left(\frac{\vecop{p}^2_r}{2\mu} +\frac{\hbar^2l(l+1)}{2\mu\vecop{r}^2}+\hat{V}(\vecop{r}) \right)|n,l,m\rangle_\text{rad} = E_{n,l}|n,l,m\rangle_\text{rad}.
+\end{align*}
+Now, it's clear that $|n,l,m\rangle_\text{rad}$ must be $m$-independent given that $m$ shows up nowhere in this projected TISE. Thus, we can relabel $|n,l,m\rangle_\text{rad}$ as $|n,l,m\rangle_\text{rad}\rightarrow|n,l\rangle$ to make this $m$-independence explicit. Thus, we've shown that the simultaneous eigenvectors of $\hat{H}_\text{rel}$, $\vecop{L}_\text{rel}^2$, and $\hat{L}_{\text{rel},z}$ are $|n,l,m\rangle=|n,l\rangle\otimes|l,m\rangle$, where $|l,m\rangle$, the portion of $|n,l,m\rangle$ lying purely in the angular sector, are the simultaneous eigenvectors of $\vecop{L}^2_\text{rel}$ and $\hat{L}_{\text{rel},z}$, and $|n,l\rangle$, the portion of $|n,l,m\rangle$ lying purely in the radial sector, is determined strictly by the radial TISE%
+\footnote{
+The absence of $|l,m\rangle$ the final expression determining $E_{n,l}$ does not mean that the angular sector doesn't contribute to the energy. The absence The $|l,m\rangle$ is just the result of having projected it out. The $|l,m\rangle$ do contribute to the energy through the $\frac{1}{\vecop{r}^2}\otimes\vecop{L}^2$ coupling term in $\hat{H}$, which is why $l(l+1)$ persists even after projection (while the coordinate directions are completely independent, resulting in the factorization of the Hilbert space, the Hamiltonian couples them.). The angular sector isn't energetically inert; it's already been accounted for.
+}:
 \be
-	-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}+\left(V(r) + \frac{\hbar^2}{2\mu}\frac{l(l+1)}{r^2}\right)=Eu,
+    \left(\frac{\vecop{p}_r^2}{2\mu}+\frac{\hbar^2l(l+1)}{2\mu\vecop{r}^2}+\hat{V}(\vecop{r})\right)|n,l\rangle = E_{n,l}|n,l\rangle.
 \ee
-where $\mu=(m_1m_2)/(m_1+m_2)$ is the reduced mass and $R(r) = u(r)/r$ is the radial wave function.
+In position space, the radial TISE becomes\footnote{
+One can also see this using matrix elements, $\langle r|\hat{H}_{r,\text{rel}}|r'\rangle =\left(-\frac{\hbar^2}{2\mu}\nabla^2_r+V(r)\right)\delta(r-r')=H^{\text{pos},(r)}_{\text{rel}}\delta({r}-{r}')$ and expanding the TISE in the position basis:
+\begin{align*}
+    &\hat{H}_\text{rel}|n,l\rangle = E_{n,l}|n,l\rangle\\
+    \rightarrow& \langle r|\int dr'\; \hat{H}_{r,\text{rel}}|{r}'\rangle\langle {r}'|n,l\rangle =E_{n,l}\langle {r}|n,l\rangle\\
+    \rightarrow& \int dr'H^{\text{pos},({r})}_{\text{rel}} \delta({r}-{r}')R_{n,l}({r}') = E_{n,l}R_{n,l}({r})\\
+    \rightarrow&H_{\text{rel}}^{\text{pos},{r}}\int dr' \delta({r}-{r}')R_{n,l}({r}')=E_{n,l}R_{n,l}({r}) \\ 
+    \rightarrow& H^{\text{pos},r}_\text{rel}R_{n,l}({r}) = E_{n,l}R_{n,l}({r}).
+\end{align*}
+}:
+\begin{align*}
+    &\left(\frac{\vecop{p}_r^2}{2\mu}+\frac{\hbar^2l(l+1)}{2\mu\vecop{r}^2}+\hat{V}(\vecop{r})\right)|n,l\rangle = E_{n,l}|n,l\rangle\\
+    \rightarrow&\langle r|\left(\frac{\vecop{p}_r^2}{2\mu}+\frac{\hbar^2l(l+1)}{2\mu\vecop{r}^2}+\hat{V}(\vecop{r})\right)|n,l\rangle = E_{n,l}\langle r|n,l\rangle\\
+    \rightarrow& -\frac{\hbar^2}{2\mu}\left(\nabla_r^2-\frac{l(l+1)}{r^2}-V(r)  \right)R_{n,l}(r) = E_{n,l}R_{n,l}(r),\\
+\end{align*}
+where $R_{n,l}=\langle r|n,l\rangle$ is the radial wavefunction. Note that, since we're in spherical coordinates, $\nabla_r^2=\frac{1}{r^2}\frac{d}{dr}(r^2\frac{d}{dr})$. If we make the substitution $R_{n,l}(r)=u_{n,l}(r)/r$, where $u_{n,l}(r)$ is called the reduced radial wave function, we find that the TISE takes the simple form:
 
-% Assume that the Hamiltonian can be written in the form $\hat{H} = \hat{H}_0+\hat{V}$, where Assume we have $n$ particles. Let $\bm{r}_i$ be the position vector for particle $i$. Then, a position eigenstate of the composite system looks like $\ket{\bm{r}_1}\otimes\ket{\bm{r}_2}\otimes\cdots\otimes\ket{\bm{r}_n}\rightarrow \ket{\bm{r}_1,\bm{r}_2,\dots,\bm{r}_n}$. 
+\be
+	-\frac{\hbar^2}{2\mu}\frac{d^2u_{n,l}}{dr^2}\bigg|_{r}+\left(V(r) + \frac{\hbar^2}{2\mu}\frac{l(l+1)}{r^2}\right)u_{n,l}(r)=E_{n,l}u_{n,l}(r)\label{eq:red_rad_se}.
+\ee
+This is called the reduced radial Sch{\"o}dinger equation.\\
 
-\subsection{Resonance Theory}
-% brief introduction into the theory of resonances as analyzed by the TISE
-A resonance in nuclear theory is similar to a resonance in other areas of physics. Fundamentally, a resonance is a state that is self-generating but not self-contained. I.e., a resonance is a preferred state of the system, like a bound state, but it slowly leaks into the continuum. Like a bound state, the resonance needs no asymptotic incoming behavior to exist; the system exhibits the resonant behavior without needing an external crutch. But, unlike a bound state, a resonance is not permanently stable. Of course, in practice, one would need to give the system an initial kick to actually observe the resonance, but the resulting temporary state is independent of the kick's behavior. The kick is just there to give the system enough energy to transition. This is exactly analogous to resonances in other areas of physics. In classical mechanics, a bell or guitar string oscillates at a resonance frequency. It does not need to be driven at this frequency; it prefers to oscillate at it. It's a property of the system, independent of the incoming behavior. However, it can't maintain this oscillation indefinitely; it inevitably decays. Further, the bell or guitar string, practically, needs to be given a kick to slide into its resonance (the low E on a guitar string vibrates at a low E regardless of how you pluck it, asymptotically).
-
-In fact, the math is identical as well. As discussed below, a resonance in nuclear theory is often defined as a pole of the $S$-matrix in a specific part of the complex plane. This defines the "self-generating but not self-sustaining behavior". In classical mechanics, the bell's resonant frequency is a pole of its transfer function with a complex energy. The math is identical. A pole of the $S$ matrix located on the negative real axis corresponds to a bound state: a state that is both self-generating and self-sustaining (a bound state is stable and doesn't leak). If an ideal bell were in a vacuum, its resonant state would collapse to its bound state. But, on Earth, the bell is always coupled to the air surrounding it; the bell is intrinsically open and always leaking energy to the air, so the state decays. In nuclear physics, the resonance is defined as a state that is self-generating but is open in that it leaks probability to the continuum. The analogy is nearly one-to-one.
-
-There are two pictures for a resonance that one may use:
-
-\textbf{$S$-matrix picture}: A resonance is defined as a pole of the $S$-matrix in the second Riemann sheet (identically, a pole of the analytically continued resolvent on the second Riemann sheet).
-
-The $S$ matrix implicitly captures asymptotic behavior. It doesn't encode the interior directly (though of course the interior governs the asymptotics). This statement is directly saying: a resonance is a state that is a pole of the resolvent like a bound state (continuum states are the branch cut), but one that is purely outgoing while not being a bound state. The resonance pole is not itself observable; it's an off-shell singularity that shapes the behavior of the continuum states near the resonance energy. This statement encodes the idea of the \textbf{Wigner time delay}: the continuum states near the resonance energy are delayed relative to free propagation (at energies close to the resonance energy, the state enters the resonance, and leaks back into the continuum, so continuum states with energies near the resonance are delayed compared to what they'd be without an interaction). The closer the pole is to the real axis, the longer this delay, and the sharper the resonance in cross-sections.
-
-\textbf{Gamow picture}: A Gamow state (a resonance), is defined by purely outgoing boundary conditions with an energy that isn't pure negative real (purely outgoing boundary, but not a bound state).
-
-If one looks at the reduced radial Schr{\"o}dinger equation with this requirement in mind (by looking at the general solution for a given angular momentum $l$ and what the asymptotic parts must then obey), one will find that this is only possible if the energy lies in the third or fourth quadrant of the complex plane (as such, we've analytically continued the solution set to the complex plane). The third quadrant solution grows in time and is called the anti-resonance, while the fourth quadrant solution decays in time and is called the resonance. This immediately means that the resulting state isn't normalizable (because of the positive real part of the energy), which is due to the divergent behavior at large $r$, and that the resulting state decays (because of the negative imaginary part of the energy$^+$). Intuitively, this makes sense. The state must diverge because, over time, more of the state leaks out to the continuum. If you forcefully look at this state as if it were time-independent, you're collapsing all the time-dependent "leaking information" into one snapshot representing all time, so the state must diverge at large $r$.
-
-$^+$ It should be noted that a lot of the intuitive arguments made here implicitly assume a narrow resonance, but the concept is more general.
-
-These two pictures are saying the same thing, and are often identical pictures (especially in the cases considered in these notes), but $S$-matrix picture is more general and abstract, while the Gamow picture collapses to a simplified, specific representation. In simple systems, these are identical statements (the $S$ matrix is making a statement about the asymptotic behavior of the state, as is the Gamow condition), but a Gamow state is more difficult to define explicitly in more complicated systems.
-
-Experiments measure the amount of particles hitting a detector for a given energy of incoming particles. The experiment effectively measures the differential cross-sections: the angular distribution of outgoing particles. Resonances show up as peaks near the real part of the resonance energy in cross sections because, at energies around that value, the particle is much more likely to be captured (to form a resonance). Once that resonance leaks out, it most likely is released isotropically, while particles that didn't interact move "straight through" and are released at $\theta=0$. So, the cross section spikes near the resonance because, near those energies, far more particles are released at $\theta\ne0$. It should be noted that cross-sections can't directly measure bound states. If the state is bound, it doesn't leak, so there's no particle that leaves to hit the detector. I.e., bound states occur at negative energy, and so they can't show up in scattering experiments directly at all since you can't scatter at negative energy. One must use another technique, like spectroscopy, to find bound states. Lastly, it should be noted that the theoretical treatment finds the resonant modes of the full Hamiltonian in isolation, and the scattering experiment is then one way to excite and detect those modes. The modes exist outside of the experiment, but it's how we access them. Example:
-$^{239}U^*$ is a highly excited resonance state formed from a neutron and a $^{238}U$ nucleus. The $n+^{238}U$ is the composite system analyzed in isolation, but experiments access this by firing neutrons of different energies at a $^{238}U$ nucleus.
-
-A lot of the complexity in describing resonances is that we're collapsing a time-dependent phenomena into a time-independent framework. The resonance itself is time-independent. It's a static property of the Hamiltonian. But, the realization of this resonance in any given experiment is purely time-dependent: it leaks out "over time". The pole is the state-independent object; the resulting state is what happens when you happen to excite it. We're hiding the time-dependence away, similarly to how one hides high-energy physics in effective theories.
-
-\subsection{Complex Scaling and the ABC Theorem}
-% brief introduction into complex scaling and how resonances are affected
-In complex scaling, one can show that making the substituion $r\rightarrow re^{i\theta}$ can make resonances appear bound. This is analytically continuing the Gamow state to the complex plane and evaluating it on a complex $r$-ray. Because of the $e^{i\theta}$, this can damp the diverging oscillations (for suitable choice of $\theta$) and make the Gamow state $L^2$ normalizable.
-
-The ABC theorem says that: if the potential is dilation-analytic (the analytic continuation of the potential is analytic in a specific $\theta$ wedge), then the complex scaled Hamiltonian is analytic in that wedge, the continuum is rotated to the position of the ray, and resonances become bound states (in that specific $\theta$ wedge) with the same resonance energy as before. This has huge computational advantages because it allows us to find resonances through bound state methods, and is usually easy to implement computationally.
-
-Because the complex scaled Hamiltonian is no longer normalizable, the Hermitian inner product is no longer a feasible definition for the inner product (one can normalize according to any convention one wants, and you can certainly recover the same physics if you continue to use the Hermitian inner product, but you have to be extremely careful to recognize assumptions you'll probably naturally make even though they no longer hold). Mainly, eigenvectors of the Hamiltonian are no longer naturally orthonormal wrt the Hermitian inner product, which makes insertions of identity unfortunate to work with. Defining an inner product as the c-product fixes these issues: left and right eigenvectors become identical again, the dual space structure naturally implies the left-eigenvector structure, and eigenvectors of the Hamiltonian are once again orthonormal).
-
-\subsubsection{Proof that most observables are $\phi$ independent}\label{sssection:obs_phi_indep}
-One can further show that, for any observable $A$ that is dilation-analytic and doesn't blow up pathologically (falls off faster than a specific exponential rise), expectation values like $\langle A_\theta \rangle$ are $\theta$ independent. I.e., the expectation values are regularized observables. I'll put this proof here shortly. The general idea is to show that $\langle A_{\theta+\delta\theta}\rangle = \langle A_{\theta}\rangle$ (where $\theta$ and $\theta+\delta\theta$ are in the good sector) by showing that the integrals end up being equivalent because $A$ is dilation analytic in the wedge, so there is no residue accumulated by integrating over the $\delta \theta$ ray.
+In summary, For one particle with position $\mathbf{r}$ or two particles with relative position $\mathbf{r}$, the energy eigenfunctions take the form
+\begin{align*}
+    |n,l,m\rangle&=|n,l\rangle\otimes|l,m\rangle\\
+    \langle\mathbf{r}|n,l,m\rangle = \langle r|n,l\rangle&\otimes \langle \mathbf{e}_\mathbf{r}|l,m\rangle\rightarrow \psi_{n,l,m}(\mathbf{r})=R_{n,l}(r)Y^m_l(\Omega),
+\end{align*}
+where $R_{n,l}(r)$ is determined by the reduced radial SE (\cref{eq:red_rad_se}) and where $Y^m_l(\Omega)$ are the spherical harmonics. The only differences between the 1D and 2D case are:
+\begin{enumerate}
+    \item In 1D, $m$ is the mass of the one particle. In 2D, $m\rightarrow\mu=m_1m_2/(m_1+m_2)$ where $m_1, m_2$ are the masses of the two particles.
+    \item In 1D, $|n,l,m\rangle$ are simultaneous eigenfunctions of $\hat{H},\vecop{L}^2,$ and $\hat{L}_z$. In 2D, $|n,l,m\rangle$ are simultaneous eigenfunctions of $\hat{H}_\text{rel},\vecop{L}^2_\text{rel},$ and $\hat{L}_{\text{rel},z}$.
+    \item In 1D, this alone solves the entire system's dynamics. In 2D, this specifically solves for the relative dynamics. But, all of the physics is captured by the relative dynamics, and the full dynamics are captured by appending the CM motion (which we've shown to be free in the cases we care about) to the relative motion: $|\Psi\rangle=|\mathbf{P}\rangle\otimes|n,l,m\rangle$ (simultaneous eigenket of $\hat{H}_\text{CM}$ and $\hat{H}_\text{rel}$).
+\end{enumerate}
