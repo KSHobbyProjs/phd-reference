@@ -19,6 +19,9 @@
 \usepackage{parskip} % no indent for new paragraphs
 % \usepackage{thmtools} % custom theorem environments for spacing control
 
+% theorem environments
+\newtheorem{theorem}{Theorem}[section]
+
 % custom commands
 \newcommand\be{\begin{equation}} % start equation env 
 \newcommand\ee{\end{equation}}   % end equation env
@@ -27,3 +30,6 @@
 \newcommand\eea{\end{equation*}}   % end equation* env
 
 \newcommand{\vecop}[1]{\hat{\mathbf{#1}}}
+
+\newcommand{\outvec}{\ket{\psi_\text{out}}}
+\newcommand{\invec}{\ket{\psi_\text{in}}}
