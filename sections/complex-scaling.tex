@@ -1,4 +1,22 @@
 \section{Complex Scaling and the ABC Theorem}
+\subsection{Spectral Theorem}
+A Hilbert space is a complete inner product space:
+\begin{itemize}
+    \item Inner product space: a vector space equipped with an inner product (notion of distance, length, and angles and a way to add states together).
+    \item Completeness: every Cauchy sequence $(a_i)_{i\in I}$ in $\mathcal{H}$ has a limit in $\mathcal{H}$ (notion of continuity).
+\end{itemize}
+The adjoint of an operator $H$ in an inner product space $S$ is the operator $H^\dagger$ s.t. $\langle H^\dagger \psi, \phi\rangle = \langle \psi, H\phi\rangle$ $\forall$ $\psi, \phi$ $\in S$. If an operator is self-adjoint, then $H^\dagger=H$ or $\langle H \psi, \phi\rangle = \langle \psi, H\phi\rangle$. Generally, we work with the Hilbert space $\mathcal{H}\subseteq L^2(\mathbb{R}^2)$ equipped with the Hermitian inner product. In this case, the Hamiltonian is self-adjoint (in general, we assume that the Hamiltonian in any physical Hilbert space is self-adjoint). Self-adjoint operators under the Hermitian inner product have real eigenvalues. The spectral theorem guarantees that, for any self-adjoint operator $H$, there exists a projection-valued measure $P(\lambda)$ (projection-valued measure guarantees that $dP(\lambda)$ is an orthogonal projector with respect to the inner product) such that
+\[
+    H = \int_\mathbb{R} \lambda P(\lambda) \text{ and } I = \int_\mathbb{R} dP(\lambda).
+\]
+For a general Hamiltonian, the spectrum is usually of the form $\sigma(H) = \{E_1, E_2, \dots, E_n\}\;\cup\; [E_\text{th},\infty)$ (the union of the discrete spectrum and continuous spectrum), and $P_\text{cont}|n\rangle = 0$ (the projection of a bound state onto the continuum subspace is null and visa vera). Then,
+\[
+    H = \sum_n E_n |n\rangle\langle n| + \int_{E_\text{th}}^\infty \; dE\;E\; |E\rangle\langle E| \text{ and } I = \sum_n |n\rangle\langle n| + \int_{E_\text{th}}^\infty dE |E\rangle \langle E|
+\]
+We rely heavily on the self-adjoint-ness of $H$ (and all other operators representing physical observables) and the spectral theorem in quantum mechanics. Once we complex scale the Hamiltonian, it is no longer self-adjoint with respect to the Hermitian inner product, and many of our assumptions break down. However, if we equip our Hilbert space with the c-product instead of the Hermitian inner product, the self-adjoint-ness of $H$ and the spectral theorem are recovered: $H=H^\dagger$ or $(H\psi, \phi) = (\psi, H\phi)$ $\forall$ $\psi, \phi\in \mathcal{H}$.
+
+\subsection{General Idea Behind CS}
+
 % brief introduction into complex scaling and how resonances are affected
 In complex scaling, one can show that making the substituion $r\rightarrow re^{i\theta}$ can make resonances appear bound. This is analytically continuing the Gamow state to the complex plane and evaluating it on a complex $r$-ray. Because of the $e^{i\theta}$, this can damp the diverging oscillations (for suitable choice of $\theta$) and make the Gamow state $L^2$ normalizable.
 
