@@ -1,9 +1,9 @@
-\section{Non-relativistic Scattering Theory Overview}
-\subsection{Setup}
+\chapter{Non-relativistic Scattering Theory Overview}
+\section{Setup}
 In scattering experiments, a beam of particles is shot toward some target, the incoming particles react to the target via some potential, and they leave the target in an outgoing state that's, in general, different from the incoming state. The goal is to relate the asymptotic incoming behavior of the state, $\ket{\psi_\text{in}}$, to the asymptotic outgoing behavior of the state, $\ket{\psi_\text{out}}$. This idea can represent an incoming particle scattering off some fixed potential, two particles interacting via some shared potential, etc. With Hamiltonian $H$, the state at $t=0$, $\ket{\psi}$ evolves as $\ket{\psi}(t)=U(t)\ket{\psi}$ with $U(t)=\exp(-iHt/\hbar)$.
-\subsection{\texorpdfstring{The $S$-matrix and $T$-matrix}{The S matrix and T matrix}}
+\section{\texorpdfstring{The $S$-matrix and $T$-matrix}{The S matrix and T matrix}}
 We proceed now to find a relationship between $\ket{\psi_\text{in}}$, $\ket{\psi_\text{out}}$, and $\ket{\psi}$. Consider a Hamiltonian $H=T+V$. For sufficiently well-behaved potentials $V$, the following theorem holds:
-\subsubsection{The Asymptotic Condition}
+\subsection{The Asymptotic Condition}
 \begin{theorem}[Asymptotic Condition:]
     For every $\ket{\psi_\text{in}}\in\mathcal{H}$, $\exists$ a state $\ket{\psi}\in\mathcal{H}$ s.t.
     \bea
@@ -18,9 +18,9 @@ In words, for every state $\ket{\psi_\text{in}}\in\mathcal{H}$ ($\ket{\psi_\text
 \be
     \ket{\psi}=\lim_{t\to-\infty}U^\dagger(t)U_0(t)\invec=\Omega_+\invec \quad \ket{\psi}=\lim_{t\to\infty}U^\dagger(t)U_0(t)\outvec=\Omega_-\outvec,
 \ee
-where $\Omega_{\pm}=\lim_{t\to\mp\infty}U^\dagger(t)U_0(t)$ are called the M{\o}ller operators. This is slightly more non-trivial than it seems. This defines $\Omega_\pm$ as isometries on. 
-\subsection{Lippmann-Schwinger Equation}
-\subsection{Partial Wave Expansion}
-\subsection{Analyticity and the Complex Energy Plane}
-\subsection{Wigner Time Delay}
-\subsection{Born Approximation and Validity}
+where $\Omega_{\pm}=\lim_{t\to\mp\infty}U^\dagger(t)U_0(t)$ are called the M{\o}ller operators. This is slightly more non-trivial than it seems. This defines $\Omega_\pm$ as isometries on
+\section{Lippmann-Schwinger Equation}
+\section{Partial Wave Expansion}
+\section{Analyticity and the Complex Energy Plane}
+\section{Wigner Time Delay}
+\section{Born Approximation and Validity}

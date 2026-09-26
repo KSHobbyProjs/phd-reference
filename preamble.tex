@@ -19,6 +19,14 @@
 \usepackage{parskip} % no indent for new paragraphs
 % \usepackage{thmtools} % custom theorem environments for spacing control
 
+% bibliography setup
+\usepackage[
+    backend=biber,
+    style=alphabetic,
+    sorting=nyt
+]{biblatex}
+\addbibresource{references/references.bib}
+
 % theorem environments
 \newtheorem{theorem}{Theorem}[section]
 

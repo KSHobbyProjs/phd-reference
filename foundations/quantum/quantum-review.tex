@@ -1,8 +1,8 @@
-\section{Quantum Review}
+\chapter{Quantum Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TISE FROM TDSE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Deriving the TISE from the TDSE}
+\section{Deriving the TISE from the TDSE}
 The time evolution operator obeys the time-dependent Schr{\"o}dinger (TDSE):
 \be 
 	i\hbar \;\frac{\partial}{\partial t} \hat{U}(t, t_0) = \hat{H}\hat{U}(t, t_0)\label{eq:tdse1}.
@@ -38,7 +38,7 @@ This approach derives the time-independent Schr{\"o}dinger equation (TISE) from 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SEP OF CM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Separating out the center of mass}
+\section{Separating out the center of mass}
 Consider a two-particle system where the particles have masses $m_1$ and $m_2$ and the particles' positions are $\bm{r}_1$ and $\bm{r}_2$. We can define the center of mass and relative coordinate as
 \bea
 	\bm{R} = \frac{m_1\bm{r}_1 + m_2\bm{r}_2}{m_1+m_2}\quad \bm{r} = \bm{r}_1 - \bm{r}_2,
@@ -78,7 +78,7 @@ This means that the Hamiltonian splits into two independent terms, one acting st
 
 From the above arguments, one can see that the cancellation of the cross terms between $\mathbf{r}$ and $\mathbf{R}$ is what allows the kinetic energy operator to be factorized, allowing us to separate out the center of mass motion from the relative motion.
 
-\subsubsection{Tensor product structure:}
+\subsection{Tensor product structure:}
 To make the tensor product structure explicit, note that it has been implicit from the outset: the two-particle Hilbert space is $\mathcal{H}=L^2(\mathbb{R}^3_{\mathbf{r}_1})\otimes L^2(\mathbb{R}^{3}_{\mathbf{r}_2})$, so states can be written as $|\Psi\rangle = \sum_{i,j}c_{ij}|\psi_i\rangle\otimes|\phi_j\rangle$ $\rightarrow$ $\Psi(\mathbf{r}_1, \mathbf{r}_2)=\sum_{i,j}c_{ij}\psi_i(\mathbf{r}_1)\phi_j(\mathbf{r}_2)$. The Hamiltonian is 
 \begin{align*}
     \hat{H} &= \hat{T}_{\mathbf{r}_1}\otimes \mathbb{I} + \mathbb{I}\otimes \hat{T}_{\mathbf{r}_2} + \hat{V}(\hat{\mathbf{r}}_1\otimes\mathbb{I}-\mathbb{I}\otimes \hat{\mathbf{r}}_2).
@@ -90,7 +90,7 @@ We introduce a coordinate change on $\mathbb{R}^6$: $(\mathbf{r}_1, \mathbf{r}_2
 \end{align*}
 where $\hat{H}_{\text{CM}}$ acts solely on $L^2(\mathbb{R}^3_{\mathbf{R}})$ and $\hat{H}_{\text{rel}}$ acts solely on $L^2(\mathbb{R}^3_{\mathbf{r}})$. Thus, the Hilbert space factorizes as $\mathcal{H}\cong L^2(\mathbb{R}^3_{\mathbf{r}})\otimes L^2(\mathbb{R}^3_{\mathbf{R}})$, and $\hat{H}$ respects this factorization.\\
 
-\subsubsection{\texorpdfstring{Extension to $n$ particles:}{Extension to n particles:}}
+\subsection{\texorpdfstring{Extension to $n$ particles:}{Extension to n particles:}}
 This extends to $n$ particles via Jacobi coordinates. The kinetic energy $\hat{T}=\sum_i \frac{\hat{\mathbf{p}}_i^2}{2m_i}$ defines a quadratic form on momentum space with Gram matrix $G_{ij}=\frac{1}{m_i}\delta_{ij}$ (this is just the inverse mass matrix $M=\text{diag}(m_1, \dots, m_n)$). Define a set of linear transformations of the coordinates: $\mathbf{q}_\alpha=\sum_i J_{\alpha i}\mathbf{r}_i$ with $J_{\alpha i} = \frac{\partial \mathbf{q}_\alpha}{\partial \mathbf{r}_i}$ constant. We can do this because we're asserting that we have a linear transformation. If we didn't, the Jacobian would be position-dependent, and the following arguments fall apart. Further, we assume that the Jacobian is non-degenerate, meaning that the coordinate transformation we define produces $n$ new, independent coordinates with no redundancy. Thus, $\mathbf{J}$ is invertible, and $\mathbf{q}=\mathbf{J r}$ and $\mathbf{r}=\mathbf{J}^{-1}\mathbf{q}$ (where $\mathbf{q},\mathbf{r}\in\mathbb{R}^{3n}$). The transformation is linear with constant coefficients, so gradients transform as $\nabla_{\mathbf{r}_\alpha}=\sum_i J_{\alpha i} \nabla_{\mathbf{q}_i}$. Thus,
 \begin{align*}
     \hat{T}=\sum_i \frac{\hat{\mathbf{p}}_i^2}{2m_i} \rightarrow T^\text{pos}&= -\frac{\hbar^2}{2}\sum_i\frac{1}{m_i}\left(\sum_j J_{ij} \nabla_{\mathbf{q}_j}\right)^2\\
@@ -110,8 +110,8 @@ The inductive construction works because at each step, the two-particle calculat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SEP OF ANG MOM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Separating out Angular Motion}
-\subsubsection{Overview of Angular Momentum:}
+\section{Separating out Angular Motion}
+\subsection{Overview of Angular Momentum:}
 Angular momentum $\hat{\mathbf{J}}$ is defined as the generator of rotations. An infinitesimal rotation by angle $\delta\phi$ about axis $\vecop{n}$ acts on states as
 \bea
     U(\delta\phi) = 1 - \frac{i}{\hbar}\delta\phi\vecop{n}\cdot\vecop{J},
@@ -129,7 +129,7 @@ The first two are just general group properties. The third is a property that Li
 
 This Lie algebra defines everything about rotations, regardless of representation or basis. From this structure alone, we can prove that $[\vecop{J}^2, \hat{J}_k]=0$ for any one $k$. Thus, $\vecop{J}^2$ and $\hat{J}_k$ are simultaneously diagonalizable with simultaneous eigenkets $|j, m\rangle$ ($[\hat{J}_i,\hat{J}_j]\ne 0$ when $j\ne i$, so we can't simultaneously diagonalize all components of angular momentum at once. We can only add one component to our commuting set). Using ladder operators, we can further show that $m=-j, -j+1, \dots,0, \dots,j-1,j$; $\vecop{J}^2|j, m\rangle=\hbar^2j(j+1)|j,m\rangle$; and $\hat{J}_k|j,m\rangle = \hbar m|j,m\rangle$ (i.e., the $\hat{J}_z$ spectrum is discrete with eigenvalues determined by the eigenvalue of $\vecop{J}^2$). Further, this establishes that each $j$-eigenspace of $\vecop{J}^2$ is $(2j+1)$-fold degenerate, and $\hat{J}_z$ resolves this degeneracy. Since $[\vecop{J}^2, \hat{J}_k]=0$ guarantees $\hat{J}_k$ maps each $j$-subspace to itself, we can diagonalize $\hat{J}_k$ within each block independently, yielding the unique simultaneous eigenbasis $|j, m\rangle$ without mixing different $j$ values. The ladder operator derivation hinted at above is precisely doing this simultaneous diagonalization procedure in disguise.\\
 
-Spin, $\vecop{S}$, is one example of an angular momentum operator (meaning it satisfies the angular momentum commutation relations). It corresponds to half-integer-$j$ irreps of $\mathfrak{su}(2)$, and generates $SU(2)$ transformations acting on spinor space $\mathbb{C}^2$ (see \cref{appendix:groups} for a brief overview of Lie group structure). This type of rotation has no interpretation as rotations of physical $\mathbb{R}^3$. Orbital angular momentum, $\vecop{L}=\vecop{x}\times\vecop{p}$, is another example. It corresponds to integer-$j$ irreps of $\mathfrak{su}(2)\cong\mathfrak{so}(3)$, and generates $SO(3)$ transformations acting on $\mathbb{R}^3$ (rotations of physical space)\footnote{
+Spin, $\vecop{S}$, is one example of an angular momentum operator (meaning it satisfies the angular momentum commutation relations). It corresponds to half-integer-$j$ irreps of $\mathfrak{su}(2)$, and generates $SU(2)$ transformations acting on spinor space $\mathbb{C}^2$. This type of rotation has no interpretation as rotations of physical $\mathbb{R}^3$. Orbital angular momentum, $\vecop{L}=\vecop{x}\times\vecop{p}$, is another example. It corresponds to integer-$j$ irreps of $\mathfrak{su}(2)\cong\mathfrak{so}(3)$, and generates $SO(3)$ transformations acting on $\mathbb{R}^3$ (rotations of physical space)\footnote{
 There are two ways to arrive at this expression. (1) Take it as a definition. (2) Require that $\vecop{L}$ must generate rotations of the position eigenbasis itself: $|\mathbf{x}\rangle\rightarrow|R\mathbf{x}\rangle$. This is a special restriction because the position eigenkets aren't true states in the Hilbert space. They're generalized states in the Gelfand triple. So, requiring $\vecop{L}$ rotate these states just as it does rotate normal states in the Hilbert space forces $\vecop{L}$ to take a specific form: Taylor expand $\langle \mathbf{x}|U(\delta\phi)|\psi\rangle\approx\psi(\mathbf{x}-\delta\phi\vecop{n}\times\mathbf{x})$ and compare this to the generator expression $U(\delta\phi)|\psi\rangle=(1-\frac{i}{\hbar}\delta\phi\vecop{n}\cdot\vecop{L})|\psi\rangle$. This immediately implies $\vecop{L}=\vecop{x}\times\vecop{p}$. One more restriction: since $\mathbf{x}$ are in $\mathbb{R}^3$, a $2\pi$ rotation should return every $\mathbf{x}$ to itself. As such, only integer-$j$ irreps of $\mathfrak{su}(2)$ are admitted: the $l$ eigenvalue is restricted to integers (this is easy to see by writing the finite rotation transformation, $\exp(-i\vecop{L}\cdot\vecop{n}\phi/\hbar)$, and noting that this must return to the identity transformation at $\phi=2\pi$. In the $|l,m\rangle$ basis, this operator acts as $e^{-im\phi}$ (assuming $\vecop{n}$ points along the quantization axis; i.e., the axis which the quantum number $m$ is defined for). Then, for $e^{-i2\pi m}=1\;\forall\; m$, $m\in\mathbb{Z}$, and since $m\in\{-l, \dots, l\}$, $l\in\mathbb{Z}$). 
 }. One can show using the definition $\vecop{L}=\vecop{x}\times\vecop{p}$ that, in position space, 
 \begin{align}
@@ -138,7 +138,7 @@ There are two ways to arrive at this expression. (1) Take it as a definition. (2
 \end{align}
 These expressions can be used to find the simultaneous eigenvectors of $\vecop{L}^2$ and $\hat{L}_z$ in the position basis: the spherical harmonics, $\langle \mathbf{x}|l,m\rangle=Y^m_l(\Omega_{\mathbf{x}})$. It's important to note that these eigenfunctions are established completely independently from any Hamiltonian. Their form is completely determined by the structure of $\vecop{L}$, which has nothing to do with $\hat{H}$.
 
-\subsubsection{Finding Simultaneous Eigenkets}
+\subsection{Finding Simultaneous Eigenkets}
 Now, if $[\vecop{L}, \hat{H}]=0$, $[\hat{H}, \vecop{L}^2]=0$ and $[\hat{H}, \hat{L}_k]=0$, so one can simultaneously diagonalize $\hat{H}$, $\vecop{L}^2$, and $\hat{L}_k$ to find simultaneous eigenkets $|n, l, m\rangle$ where $n$ corresponds to the energy eigenvalue. Note that $[\hat{H}, \vecop{L}^2]=[\hat{H}, \hat{L}_k]=0$ alone says nothing about how the energy spectrum specified by $n$ relates to $l$ or $m$ (if there exists a relationship at all), if the energy spectrum is discrete, or if the energy spectrum is degenerate. However, $[\vecop{L}, \hat{H}]=0$, from which we derived $[\vecop{L}^2, \hat{H}]=[\hat{L}_z,\hat{H}]=0$, does. $[\hat{H},\vecop{L}]=0\rightarrow [\vecop{L}_{\pm},\hat{H}]=0$. Thus, if $|n,l,m\rangle$ is an eigenvector of $\hat{H}$ with eigenvalue $E_{n,l,m}$, then
 \begin{align*}
     \hat{H}\vecop{L}_+|n,l,m\rangle = \vecop{L}_+\hat{H}|n,l,m\rangle = E_{n,l,m}\vecop{L}_+|n,l,m\rangle.

@@ -1,25 +1,30 @@
-\documentclass[12pt]{article}
-\input{macros}
+\documentclass[
+    11pt,
+    oneside,
+]{book}
 
-\title{Notes on Eigenvector Continuation and Resonance Theory}
-\author{Keanan Scarbro}
-\date{\today}
+\input{preamble}
 
 \begin{document}
-	\maketitle
-	\tableofcontents
-	
-	%\input{sections/introduction}
-	\input{sections/quantum-review}
-    \input{sections/scattering-theory}
-    \input{sections/resonances}
-    \input{sections/complex-scaling}
-	\input{sections/ec}
-	\input{sections/pmm}
-	\input{sections/dvr}
-	\input{sections/broad-overview}
+    \frontmatter
+    
+    \input{frontmatter/title}
+    \tableofcontents
+    \input{frontmatter/preface}
+    \input{frontmatter/notation}
 
-    \appendix
-    \input{appendix/groups}
-	
+    \mainmatter
+
+    \part{Mathematical Foundations}
+    \input{foundations/mathematics/sets}
+    \input{foundations/mathematics/hierarchies}
+    \input{foundations/mathematics/vector-spaces}
+
+    \part{Physics Foundations}
+    \input{foundations/quantum/quantum-review}
+    \input{foundations/quantum/scattering-theory}
+
+    \backmatter
+    \printbibliography
+    
 \end{document}

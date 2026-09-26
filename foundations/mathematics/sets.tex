@@ -1,0 +1,78 @@
+\chapter{Sets and Mathematical Preliminaries}
+\section{General Terminology}
+\begin{itemize}
+    \item Set: a collection of mathematical objects. $X$.
+    \item Null / empty set: The set defined by containing nothing. $\emptyset$.
+    \item Map: a mapping that associates objects from one set $X$ to objects of another $Y$. $m: X\rightarrow Y$.
+    \item Product: $X\times Y$ is the set of all ordered pairs $(x,y)$ where $x\in X$, $y\in Y$. That is, $X\times Y=\{ (a, b) \;|\; x\in X \text{and} y\in Y\}$.
+\end{itemize}
+
+\section{Extra Set Terminology}
+\begin{itemize}
+    \item Subset: a set $U$ that contains some or all of the elements of another set $X$: $U\subseteq X$.
+    \item Proper subset: a set $U$ that contains some, but not all, of the elements of another set $X$: $U\subset X$.
+    \item Intersection: the set made of the items between two sets $X$ and $Y$. $X\cap Y$.
+    \item Union: the set made of combining two sets. $X\cup Y$.
+\end{itemize}
+
+\section{Extra Function Terminology}
+\begin{itemize}
+    \item Domain: the set a mapping is restricted to act on. E.g. for $m: U\subset X\rightarrow Y$, Dom$(m)=U$.
+    \item Codomain: the set a mapping is restricted to map into. E.g., for $m: X\rightarrow Y$, Cod$(m)=Y$.
+    \item Image of a subset $U\subseteq X$ for a mapping $m: X\rightarrow Y$: $m(U) = \{m(u) \;\forall \;u \in U\}$. Image$(m)=m(X)$.
+    \item Inverse: if $m: X\rightarrow Y$, then $m^{-1}(U) = \{x \;\forall \;x\in X\;|\; m(x)\in U\subseteq Y \}$ for $U\subseteq Y$.
+    \item Function: a mapping that assigns exactly one element of the second set to each element of the first.
+    \item Bijection: a mapping that is both injective and surjective.
+    \begin{itemize}
+        \item Injective (one-to-one): A function that maps distinct elements of its domain to distinct elements of its codomain: that is, $x_1\ne x_2$ implies $m(x_1)\ne m(x_2)$.
+        \item Surjective (onto): A function for which, for every element $y$ of the function's codomain, there exists at least one element $x$ in the function's domain such that $f(x)=y$.
+    \end{itemize}
+\end{itemize}
+
+\section{Equivalence Classes and Quotient Spaces}
+\begin{itemize}
+    \item Binary relation over sets $X, Y$ is a set of ordered pairs $(x, y)$, $x\in X$, $y\in Y$ (or, $(x, y)\in X\times Y$). Intuitively, it represents the concept of a relation: an element $x$ is \textit{related} to an element $y$ if and only if the pair $(x, y)$ belongs to the set of ordered pairs that defines the binary relation.
+    \item Equivalence relation on a set $X$: a binary relation $\sim$ on $X$ satisfying the following properties:
+    \begin{itemize}
+        \item $a\sim a$ for all $a \in X$ (reflexivity),
+        \item $a \sim b$ implies $b \sim a$ for all $a, b\in X$ (symmetry),
+        \item $a\sim b$ and $b\sim c$ implies $a\sim c$ for all $a, b, c\in X$ (transitivity).
+    \end{itemize}
+    \item Equivalence class of an element $a\in X$: the set $[a]=\{x \in X: a\sim x\}$.
+    \item Quotient set of $X$ by $R$: If $X$ is a set and $R$ is an equivalence relation, then the quotient set of $X$ by $R$, $X/ R$, is the set of all equivalence classes in $X$ with respect to an equivalence relation $R$. This is often written as $X / \sim$ for an understood equivalence relation written as $\sim$.
+\end{itemize}
+
+\section{Structure and Homomorphisms}
+We can add structure, or \textbf{operations}, to a set. The only restriction on an operation is that it takes as input a fixed number of elements of a set and returns an element of the same set. In this way, an operation can be thought of as a mapping on a set $S$, $m: S\times S \times \cdots\times S\rightarrow S$. The number of different elements taken as input, called operands, defines the "arity" of the operation. Most commonly studied are operations with arity 2, $m: S\times S\rightarrow S$, and these are called binary operations. An \textbf{identity} is an equation between two expressions, possibly involving variables, that is required to hold for every assignment of values to those variables in the underlying set (e.g. $a + 0= a$ and $a + (-a) = 0$). 
+
+\noindent An \textbf{algebraic structure} consists of a nonempty set $A$, a collection of operations on $A$, and a collection of identities (known as axioms\footnote{Specifically, non-logical axioms. Logical axioms are tautologies or logical truths. Non-logical axioms aim to capture what is special about a particular structure rather than what is forced by logic alone.}) that those operations satisfy. The following items pertain to algebraic structures:
+
+\textbf{Signature:} a specification of the symbols used to describe a type of mathematical structure, together with the arity of each operation or relation. A signature may contain operation symbols, constant symbols (equivalently, $0$-ary operation symbols), and relation symbols. A structure for a signature $\Sigma$ consists of an underlying set together with an interpretation of each symbol in $\Sigma$. The signature specifies the \emph{kind} of structure, but not the particular underlying set or the particular interpretations of its symbols. Loosely, \textbf{signature + interpretation + axioms = algebraic theory / structure}: a structure tells you what operations exist, a particular structure / interpretation tells you what those operations actually are, and the axioms constrain those interpretations. For example, the signature of groups may be written
+\[
+    \Sigma_{\mathrm{Grp}}
+    =
+    \left\{
+        \cdot^{(2)},\,
+        (\cdot)^{-1(1)},\,
+        e^{(0)}
+    \right\},
+\]
+corresponding to a binary operation, a unary operation, and a constant, respectively. A particular group $G$ then interprets these operations in a specific way that aligns with the axioms (like, for $SO(3)$, the set is specifically the group comprises of the set of special, orthogonal matrices, the binary operation is matrix multiplication, the unary operation is the matrix inverse, and the 0-ary is the identity matrix).
+\begin{itemize}
+    \item \textbf{Homomorphism:} a map between two structures of the same signature that preserves the interpretations of the signature's operations, constants, and relations (when present). In particular, if $f:A\rightarrow B$ is a map between two structures and $g$ is an $n$-ary operation symbol in their common signature, then
+    \[
+        f\bigl(g_A(x_1,\ldots,x_n)\bigr)
+        =
+        g_B\bigl(f(x_1),\ldots,f(x_n)\bigr)
+    \]
+    for all $x_1,\ldots,x_n\in A$. Similarly, for a constant symbol $c$,
+    \[
+        f(c_A)=c_B.
+    \]
+    One often says that $f$ \emph{preserves} the operations and constants.
+    \item Isomorphism: a bijective homomorphism.
+    \item Endomorphism: a homomorphism whose domain equals its codomain.
+    \item Automorphism: an endomorphism that is also an isomorphism.
+\end{itemize}
+As an example, $\mathbb{R}^4$, the set of 4-dimensional tuples over $\mathbb{R}$ can be equipped with operations that can make it a vector space (vector addition and scalar multiplication in the normal way). $\mathcal{M}^{2\times 2}$, the set of all 2$\times$2 matrices over $\mathbb{R}$, can also be equipped with operations that make it a vector space (matrix addition and scalar multiplication in the normal way). They're both vector spaces, but they're different vector spaces. However, one can define an isomorphism between the two, showing that they share the same vector structure.
+

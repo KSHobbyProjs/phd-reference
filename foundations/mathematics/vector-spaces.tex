@@ -1,0 +1,183 @@
+\chapter{Vector Spaces}
+\section{Fields}
+\textbf{Field}: A non-empty set $F$ equipped with two binary operations, addition ($+$) and multiplication ($\cdot$) satisfying the following axioms:
+\begin{itemize}
+    \item Associativity of addition and multiplication: $a + (b+c) = (a+b) + c$, and $a\cdot (b\cdot c)=(a\cdot b)\cdot c$.
+    \item Commutativity of addition and multiplication: $a + b = b + a$, and $a\cdot b=b\cdot a$.
+    \item Additive and multiplicative identity: $\exists$ elements $0, 1\in F$ s.t. $a+0=a$ and $a\cdot 1=a$ $\forall$ $a\in F$.
+    \item Additive inverses: $\forall$ $a\in F$, $\exists$ $-a\in F$ such that $a + (-a) = 0.$
+    \item Multiplicative inverses: $\forall$ $a\in F \;\backslash\;\{0\}$, $\exists$ $a^{-1}\in F$ (also labeled $1/a\in F$) s.t. $a \cdot a^{-1}=1$.
+    \item Distributivity of multiplication over addition: $a \cdot (b + c) = a\cdot b + a\cdot c$.
+\end{itemize}
+The signature of a field is given by 
+\[
+    \Sigma_{\text{field}} = \{\cdot^{(2)}, +^{(2)}, 0^{(0)}, 1^{(0)}\}. 
+\]
+This signature only includes primitive operations. Another commonly used definition of the signature could include the induced operations (the inverses as unary operations), which would look like 
+\[
+    \Sigma_{\text{field}} = \{\cdot^{(2)}, +^{(2)}, 0^{(0)}, 1^{(0)}, -^{(1)}, {^{-1}}^{(1)}\},
+\]
+where it's important to note that $^{-1}: F\;\backslash\;\{0\}\rightarrow F\;\backslash\;\{0\}$. We avoid using definition as, to us, the signature is there to specify the primitive operations of the language. Operations that are uniquely determined by these operations and the axioms need not be included as primitive operations, and including them can often complicate things. For example, there's the added issue that the multiplicative operation $^{-1}$ is \textit{technically} not a unary operation on $F$ as it's domain and image exclude the additive identity element $\{0\}\in F$. \linebreak
+
+\noindent However, the motivation for the richer signature definition is as follows: the axioms are part of the structure, so operations implied by the axioms characterize the structure just as much as primitive operations do; as such, the signature should maybe include these operations.
+\linebreak
+
+\noindent\textbf{Vector space}: A vector space over a field $F$ is a non-empty set $V$ equipped with a binary operation $+: V\times V\rightarrow V$ (vector addition) and a binary function $\cdot:F\times V\rightarrow V$ (scalar multiplication, also often written as $\cdot(a, v) = a\cdot v=av$ for $a\in F$ and $v\in V$) that satisfy the following eight axioms (in the following, $a, b\in F$, and $u, v, w\in V$, and, unless otherwise stated, the following apply to all such elements in the sets):
+\begin{itemize}
+    \item Associativity of vector addition: $u+(v+w)=(u+v)+w$.
+    \item Commutativity of vector addition: $u+v=v+u$.
+    \item Identity element of vector addition: $\exists$ $0\in V$, called the zero vector, s.t. $v + 0 = v$ $\forall$ $v\in V$.
+    \item Inverse elements of vector addition: $\forall$ $v\in V$, $\exists$ $-v\in V$ s.t. $v + (-v) = 0$.
+    \item Compatibility of scalar multiplication with field multiplication: $a\cdot(bv)=(a\cdot_{F}b)v$, where $\cdot_F$ is the multiplication operation in the field $F$.
+    \item Identity element of scalar multiplication: $1_{F} v=v$, where $1_{F}$ is the multiplicative identity in the field $F$.
+    \item Distributivity of scalar multiplication with respect to vector addition: $a (u + v) = au + av$
+    \item Distributivity of scalar multiplication with respect to field addition: $(a +_{F} b)v = av + bv$, where $+_{F}$ is the addition operation in the field $F$.
+\end{itemize}
+A vector space over a field can be written as $(V, F, +_V, \cdot_V)$ where $V$ is the set of vectors, $F$ is the field, $+$ is the vector addition operation, and $\cdot$ is the scalar multiplication binary function. However, unless being explicit is necessary, the vector space is often just written as $V$ with the field and operations implied. Vector spaces are, in some sense, complicated structures as they involve the coupling of two algebraic structures: the set of vectors with the vector addition operation forms an abelian group under vector addition (more on this below), while the scalars form a field $F$ under their own addition and multiplication. Scalar multiplication $F\times V\rightarrow V$ couples these structures through the above axioms. For a fixed field $F$, a vector space can nevertheless be described by a signature in which scalar multiplication is represented by a family of unary operations $v\mapsto av $, one for each $a\in F$. In this way, the signature for a vector space over a fixed field $F$ could be written as
+\[
+    \Sigma_{(V, F)} = \{+_V^{(2)}, 0_V^{(0)}, \{\lambda^{(1)}:\lambda\in F\}\}.
+\]
+Here, we've neglected the implied unary operations and only included primitive operations. The $\{\lambda^{(1)}:\lambda \in F\}$ is saying that for ever fixed scalar $\lambda\in F$, there is a unary operation $\lambda_V:V\rightarrow V$, $v\mapsto \lambda v$. Further, we treat the fixed field $F$ as external, which is why this signature neglects the operations defining the field $F$ itself. If one wanted the signature to instead represent the entire coupled structure, rather than treating $F$ as fixed external data, one could instead use a two-sorted signature containing the field operations on $F$, the vector space operations on $V$, and the scalar multiplication $F\times V\rightarrow V$. We neglect to do this as, for our purposes, this level of detail is pedantic and has diminishing returns.
+
+\section{General Properties of Vector Spaces}q
+Let $V$ be a vector space over field $F$.
+\begin{itemize}
+    \item Linear combination: a linear combination of a set of vectors $\{v_1, v_2,\dots,v_n\}$ in $V$ is a vector of the form $a_1v_1+a_2v_2+\dots+a_n v_n$ for some $a_1, a_2, \dots, a_n\in F$.
+    \item Subspace of $V$: if $V$ is a vector space over field $F$, a subset $U\subset V$ is a subspace of $V$ if $U$ is also a vector space over $F$ for the operations of $V$.
+    \item Span of subset $U\subset V$: the intersection $W$ of all subspaces of $V$ that contain $U$: the smallest subset of $V$ containing $U$. Identically, the span is the set of all possible linear combinations of the vectors in $U$: when $U=\{v_1, \dots, v_n\}$
+    \[
+        \text{span}(U) = \{a_1v_1 + a_2v_2 + \dots + a_n v_n \;|\; a_1, \dots, a_n \in F\}.
+    \]
+    \item A subset of vectors $\{v_1, v_2,\dots, v_n\}$ is called linearly independent if a linear combination of all vectors in the subset is only zero iff the coefficients in the linear combination are all identically zero:
+    \[
+        \sum_{i=1}^n a_i v_i = 0
+    \]
+    implies all $a_i = 0$. Otherwise, the vectors are called linearly dependent. A subset $U\subset V$ is called linearly independent if all vectors in the subset are linearly independent with respect to each other.
+    
+    \item Finite-dimensional vector space: a vector space $V$ such that $\exists$ a finite subset $U\subset V$ for which span$(U)= V$. This implies that, $\forall$ $v\in V$, $\exists$ $a_1, a_2, \dots, a_n\in F$ and $v_1, v_2,\dots,v_n\in V$ s.t.
+    \[
+        v = \sum_{i=1}^n a_i v_i
+    \]
+    for $n$ finite.
+    \item Basis: a linearly independent subset of vectors that spans the space. A basis is guaranteed to exist for a finite-dimensional vector space, and every such basis has the same number of elements. An ordered basis is a basis $\{e_1, e_2, \dots, e_n\}$ of $V$ such that the order of those elements is maintained (this is only important for consistency when discussing certain linear algebra topics like basis transformations and not something that changes the math).
+    \item Dimension: the number of vectors in any basis of a finite-dimensional vector space.
+    \item For a finite-dimensional vector space of dimension $n$, any subset with greater than $n$ elements must be linearly dependent (but \textit{can} span the space), and any subset with less than $n$ elements must not span the space (but \textit{can} be linearly independent).
+    \item If two spaces have the same dimension, then there is necessarily an isomorphism uniting them, and they're said to be isomorphic.
+    \item There can exist a notion of a basis in infinite-dimensional vector spaces, but many pleasant theorems assume we're working with a finite-dimensional space.
+\end{itemize}
+
+\section{Linear Maps}
+Let $V, W, X$ be vector spaces over a field $F$.
+\begin{itemize}
+    \item \textbf{Linear map}: A map $T: V\rightarrow W$ such that 
+    \[
+        T(av + bu) = aT(v) + bT(u)
+    \]
+    $\forall$ $a, b\in F$, $v, u\in V$. Any such map can be represented as a matrix.
+    \item \textbf{Bilinear map}: A map $T: V\times W\rightarrow X$ that is linear in each argument separately:
+    \[
+        T(av_1 + bv_2, u) = aT(v_1, u) + bT(v_2, u) \text{ and}
+    \]
+    \[
+        T(v, cu_1+du_2) = cT(v, u_1) + dT(v, u_2)
+    \]
+    $\forall$ $a, b, c, d\in F$, $u_1, u_2\in W$, $v_1, v_2\in V$.
+    \item\textbf{Multilinear map}: A map $T: V_1\times V_2\times \dots \times V_n\rightarrow W$ that is linear in each argument separately.
+    \item\textbf{Sesquilinear}: A map $T: V\times W\rightarrow F$ that is linear in one argument and conjugate-linear in the other. For complex vector spaces (say, over the field $\mathbb{C})$:
+    \[
+        T(av_1+bv_2, u) = aT(v_1, u) + bT(v_2, u) \text{ and}
+    \]
+    \[
+        T(v, cu_1+cu_2) = c^*T(v, u_1) + d^*T(v, u_2) 
+    \]
+    $\forall$ $a, b, c, d\in F$, $v_1, v_2\in V$, $u_1, u_2\in W$.
+\end{itemize}
+Like mentioned above, any linear map can be represented as a matrix and bilinear maps can also be represented as a matrix. Let $V$ be a finite-dimensional vector space of dimension $n$ with a basis $E=\{e_1, e_2, \dots, e_n\}$. Then, any vector $v\in V$ can be written as $v=\sum_{i=1}^n a_i e_i$ for some $a_i\in F$. The $(n, 1)$ matrix
+\[
+    \begin{pmatrix}
+        a_1 \\
+        a_2 \\
+        \vdots \\
+        a_n
+    \end{pmatrix}
+\]
+is called a column vector or the coordinate vector of $v$ in the basis $E$. Sometimes, this is written as $[v]_E$, though sometimes it's understood just by context when writing $v$. What this is really hiding is an isomorphism $\phi_E: F^n\rightarrow V$ (an $n$-dimensional vector space is necessarily isomorphic to $F^n=F\times F\times\cdots\times F$ with the standard definitions of vector addition and scalar multiplication implied by the Cartesian product of the field): 
+\[
+    \phi_E(a_1, \dots, a_n) = \sum_i a_i e_i.
+\]
+
+
+\noindent Let $E$ be a basis for $V$ and let $E'$ be a basis for another vector space $W$ of dimension $m$. Then, the action of the linear map $T: V\rightarrow W$ can be expressed as
+\begin{align}
+    T(v) = w&\rightarrow T\left( \sum_{i=1}^n a_ie_i\right) = w\\
+    & \sum_{i=1}^n a_i T(e_i) = w.
+\end{align}
+So, the action of the transformation is completely determined by how it maps the basis elements of one space to the other space. Thus, expanding $T(e_i)\in W$ in the basis of $E'$, we find
+\begin{align}
+    T(e_i) = \sum_{j=1}^m T_{ji} e'_j
+\end{align}
+for some $T_{ji}\in F$. Thus,
+\begin{align}
+    T(v) = \sum_{i=1}^n a_i \sum_{j=1}^m T_{ji}e'_j = \sum_{j=1}^m e_j'\left(\sum_{i=1}^n T_{ji}a_i\right).
+\end{align}
+One can write this in matrix form as
+\begin{align}
+    [T(v)]_{E'} = 
+    \begin{pmatrix}
+        T_{11} & T_{12} & \cdots & T_{1n} \\
+        T_{21} & T_{22} & \cdots & T_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        T_{m1} & T_{m2} & \cdots & T_{mn}
+    \end{pmatrix}\begin{pmatrix}
+        a_1\\
+        a_2\\
+        \vdots\\
+        a_n
+    \end{pmatrix}.
+\end{align}
+From this, it's clear that the matrix
+\[
+     \begin{pmatrix}
+        T_{11} & T_{12} & \cdots & T_{1n} \\
+        T_{21} & T_{22} & \cdots & T_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        T_{m1} & T_{m2} & \cdots & T_{mn}
+    \end{pmatrix}
+\]
+is the matrix form of the transformation in the basis $E$ and $E'$ $[T]_{E\rightarrow E'}$, and the columns of this matrix $[T(e_i)]_{E'}$. \\
+
+\noindent One can see this more formally by treating $E$ and $E'$ as tuples: $(E) = (e_1, \dots, e_n)$ and $(E')=(e'_1, \dots, e'_m)$ and extending $T$ component-wise across the tuple: $TE:=(T(e_1), \dots, T(e_n))$. Using the coordinate isomorphism associated with $E'$: $\phi_{E'}: F^m\rightarrow W$, we can extend the inverse across the tuple $TE$:
+\[
+    \phi^{-1}_{E'}(TE) = ([T(e_1)]_{E'}, \dots, [T(e_n)]_{E'}).
+\]
+Technically, this an $n-$tuple of $m-$tuples: $(F^m)^n$. To be maximally formal, we can introduce the canonical isomorphism $\sigma: (F^m)^n\rightarrow F^{m\times n}$ s.t.
+\[
+    (v_1, \dots, v_n)\mapsto \begin{pmatrix}
+        | & | & & |\\
+        v_1 & v_2 &\cdots & v_n\\
+        | & | & & |
+    \end{pmatrix}.
+\]
+This immediately implies the matrix we established $[T]_{E\rightarrow E'} = (\sigma \circ \phi_{E'}^{-1})(TE)$.
+
+Here are some general properties of linear maps:
+\begin{itemize}
+    \item Kernel: ker$T=\{v\in V: T(v)=0\}$.
+    \item Image: im$T=\{T(v): v\in V\}\subseteq W$
+    \begin{itemize}
+        \item ker$T \subseteq V$ is a subspace of $V$ and im$T \subseteq W$ is a subspace of $W$.
+        \item nullity$(T)=$ dim ker$T$ and rank$(T)$=dim im$T$
+        \item dim $V$ = nullity$(T)$ + rank$(T)$.
+        \item $T$ injective if $T(v_1)=T(v_2)$ implies $v_1=v_2$, which means ker $T=\{0\}$\\
+        \item $T$ is surjective if im $T$=$W$
+        \item If $T$ is surjective, im$T$ = $W$, so dim $V$ = nullity $T$ + dim $W$. If $T$ is injective, then nullity $T$ = 0. So, if $T$ is bijective, dim $V$ = dim $W$ = rank$(T)$, and $T$ is called full-rank. This establishes an isomorphism between $V$ and $W$. Like any bijection, $T$ must then be invertible.
+        \item If $T$ is not a bijection, then $T$ "kills" off dimensions. For example, $T$ might take a vector in $\mathbb{R}^3$ and project it to a specific 2D plane embedded in $\mathbb{R}^3$.
+        \item If $T$ is an isomorphic endomorphism, $T:V\rightarrow V$, then $T$ can be thought of as a change-of-basis transformation: a transformation that leaves the fundamental vector unchanged and just changes the basis its represented in. This is just an interpretation. $T$ can be thought of as active: a transformation actively changing the input vector, or a passive transformation: a transformation that leaves the vector unchanged but transforms the basis it's represented in. If the transformation isn't full-rank, this
+    \end{itemize}
+    \item Eigenspace: The $\lambda$-eigenspace of $T$ is the set $E_\lambda=\{v\in V\;|\;T(v)=\lambda v\}$ or, identically, $E_\lambda=$ker$(T-\lambda I)$.
+    \item Determinant:
+    \begin{itemize}
+        \item det$(AB)$ = det$(A)$det$(B)$.
+        \item $T$ is invertible iff det$T\ne 0$ (which implies rank$T< n$, so the determinant detects whether an endomorphism loses a dimension).
+    \end{itemize}
+\end{itemize}
