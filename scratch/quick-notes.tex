@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+
+\input{preamble.tex}
+\begin{document}
+    \section*{Notes on ABC Theorem (9.26.2026):}
+	\subsubsection*{Inner Products}
+	I will likely move these to phd-reference. Inner product space is a vector space $V$ over the field $F$ together with an inner product $\langle ., .\rangle: V\times V\rightarrow F$, satisfying the following properties:
+	\begin{enumerate}
+		\item Conjugate symmetry: $\langle x, y\rangle = \overline{\langle y, x \rangle}$.
+		\item Linearity in the first argument: $\langle ax + by, z\rangle = a\langle x, z\rangle + b \langle y, z\rangle$.
+		\item Positive-definiteness: if $x$ is not zero, then $\langle x, x\rangle > 0$.
+	\end{enumerate}
+	Properties 1 and 2 imply that an inner product must be conjugate-linear in the second argument, making it a sesquilinear form. When the field is $F=\mathbb{R}$, conjugate symmetry reduces to symmetry, and sesquilinearity reduces to bilinearity. Thus, over $F=\mathbb{C}$, an inner product is a positive-definite, conjugate-symmetric, sequilinear form, and over $F=\mathbb{R}$, it reduces to a positive-definite, symmetric, bilinear form. The c-product is not technically an inner product because $(\psi, \phi)_c = (\phi,\psi)_c$; i.e., it's symmetric, not conjugate symmetric. Thus, it's a symmetric, bilinear form over the space.
+	
+	\subsubsection*{Operator Adjoint and Hermiticity}
+	The adjoint of an operator $H$, often denoted $H^\dagger$, under a specific inner product $\langle ., .\rangle$ is defined by $\langle H^\dagger \psi, \phi\rangle = \langle \psi, H\phi\rangle$ $\forall$ $\psi, \phi\in V$. If $H=H^\dagger$, $H$ is said to be self-adjoint or Hermitian. When $H$ is Hermitian, it's eigenvalues are real and all eigenvectors corresponding to distinct eigenvalues (non-degenerate) are orthogonal with respect to the inner product. To see this, let $u,v\in V$ be eigenvectors of $H$ with eigenvalue $\lambda$ and $\kappa$, respectively: $Hu =\lambda u$ and $Hv=\kappa v$ (note: zero vectors can't be eigenvectors by definition). $\langle u, Hu\rangle = \langle H u, u\rangle \rightarrow \lambda\langle u, u\rangle =\lambda u^*\langle u, u\rangle \rightarrow \lambda=\lambda^*$ $\rightarrow \lambda \in \mathbb{R}$. $\langle u, Hv\rangle = \kappa\langle u, v\rangle$ and $\langle Hu, v\rangle = \lambda^*\langle u, v\rangle$, so $\langle u, Hv\rangle - \langle Hu, v\rangle = (\kappa - \lambda)\langle u, v\rangle = 0$ (since $\lambda=\lambda^*$ as already established). Thus, unless $\lambda = \kappa$ (degeneracy), $\langle u,  v\rangle=0$, so eigenvectors corresponding to distinct eigenvalues are guaranteed orthogonal.
+	
+	\subsubsection*{Dual Spaces}
+	The dual space $V^*$ of $V$ is the space of all linear functionals $f: V\rightarrow F$. It is proveably a vector space. If one chooses basis $\{e_i\}_i$ for $V$, then a standard choice for the basis of the dual space is $\{e^i\}_i$ where $e^i(e_j) = \delta{ij}$. If $f: V\rightarrow W$ is a linear map, then the transpose (or dual) of this map $f^*: W^*\rightarrow V^*$ is defined by $f^*(\phi) = \phi\circ f$ $\forall$ $\phi\in W^*$. $f^*(\phi)$ is called the pullback of $\phi$ along $f$. This can also be written as $f^*(\phi)(v)=\phi (f(v))$. One can use an inner product to make a correspondence between the vector space and it's dual space, $V^*$. $\langle v, .\rangle$ can be thought of as a functional on $V$: it takes a vector in $V$ and produces a number in $F$. Thus, it's a member of the dual space. Let $v^*\in V^*$ be the dual vector whose action is defined by $v^*(\phi)=\langle v, \phi\rangle$ $\forall$ $\phi\in V$. Without an inner product, there is no intrinsic reason that a particular vector should correspond to a particular dual vector. Under an inner product, there is one. A metric tensor also induces a correspondence, and in fact an inner product is, loosely, an example of a metric tensor (the metric tensor is like a smoothly varying inner product over a manifold).
+	
+	\subsubsection*{Left / Right Eigenvectors}
+	For an operator $H:V\to V$, a right eigenvector $\psi_R\in V$ is defined by $H\psi_R= E_R\psi_R$. A left eigenvector $\psi^*_L\in V^*$ is defined by $H^*\psi^*_L = E_L \psi^*_L$, where $H^*$ is the dual operator of $H$, defined in the way described in the previous section. $\psi^*_L\in V^*$, so this statement is really saying $(H^*\psi^*_L)(\phi)=E_L\psi^*_L(\phi)$ $\forall$ $\phi\in V$. Using the definition of the dual operator $(H^*f)(v)=f(Hv)$, we find that a left eigenvector obeys $\psi^*_L(H\phi) = E_L\psi^*_L(\phi)$ $\forall$ $\phi \in V$. Casting this in coordinate form, where $[\psi^*_L]$ is a row vector and $[H]$ is a matrix, we have $[H^*\psi^*_L] = [\psi^*_L][H]$ as the definition of the dual operator, and the definition of the left eigenvector as $[\psi^*_L][H]=E_L[\psi^*_L].$ If we represent dual vectors as columns (transposing the entire equation): $[H]^T[\psi^*_L]_\text{col} = E_L[\psi^*_L]_\text{col}\rightarrow[H^*][\psi^*_L]_\text{col} = E_L[\psi^*_L]_\text{col}$, since $[H^*]=[H]^T$.
+	
+	So, $H\psi_R = E_R\psi_R$ and $H^*\psi^*_L= E_L \psi^*_L$. $H^*\psi^*_L(\psi_R) = E_L\psi^*_L(\psi_R).$ $H^*\psi^*_L(\psi_R)=\psi^*_L(H\psi_R)=E_R\psi^*_L(\psi_R)$. $(E_L-E_R)\psi_L^*(\psi_R)=0$. If $E_L\ne E_R$, then $\psi_L^*(\psi_R)=0$. This is biorthogonality. Note: left and right eigenvectors don't need an inner product to be defined. They're just a result of the vector space and its dual. With the dual space alone, there's a sense of "orthogonality".  Let $R_n$ be a right eigenvector with eigenvalue $\lambda_n$ and $L_m$ be a left eigenvector with eigenvalue $\lambda_m$. For now, assume $\lambda_m \ne \lambda_n$ for $n\ne m$ and assume span$(R)=V$. Then any vector $v=\sum_n c_n R_n$. Act with $L_m$: $L_m(v) = \sum_n c_n L_m(R_n) = \sum_n \delta{mn}c_n = c_m$. So,
+	$$
+		v = \sum_n R_n L_n(v).
+	$$
+	This applies for any $v\in V$, so $\sum_n R_n L_n : V\rightarrow V = I_V$. This is the biorthogonal completeness relation. Biorthogonal spectral decomposition follows similarly:
+	$$
+	A = AI = A \sum_n R_n L_n = \sum_n \lambda_n R_n L_n.
+	$$
+	The idea is basically: we can always find a dual basis $e^i$ to a vector space basis $e_i$ such that $e^i(e_j) = \delta^i_{\; j}$. The left eigenvectors are just the basis that do that for the set of right eigenvectors. 
+	
+	\textbf{What happens when $\lambda_m = \lambda_n$ (degeneracy):}
+	Assume that $A$ is diagonalizable. If it isn't, we run into issues, and this scheme might not grant us a biorthogonal pairing. Since $A$ is diagonalizable, $V = \bigoplus_{\lambda\in \sigma(A)}E_\lambda$, where $E_\lambda=\text{ker}(A-\lambda I)$. Let $d_\lambda=$dim$E_\lambda$. Then dim$V=\sum_\lambda d_\lambda$. Let $E_\lambda^L=$ker$(A^*-\lambda I)\subset V^*$. Since this left eigenvector has the same eigenvalue as the right eigenvector, the left eigenvector doesn't annihilate it.
+	Suppose $AR_{a, \alpha}=\lambda_aR_{a,\alpha}$ where $a$ labels the eigenvalue and $\alpha=1, \dots, d_a$ labels the independent eigenvectors within it's eigenspace.
+	
+	\textbf{What happens when span$(R)\subset V$:}
+	Let $R\subset V$ equal the span of the right eigenvectors. Then, $\sum_n R_n L_n$ is not the identity over all of $V$. Instead, it's the identity only over the span of the right eigenvectors. $P_R = \sum_n R_n L_n$ is the projector onto $R$ ($(P_R)^2 = P_R$). Thus, $P_Rv$ is the component of $v$ that lies in the eigenvector subspace. There exists a component $(I-P_R)v$ which can't be represented by the right eigenvectors. Thus, $A=\sum_n\lambda_n R_n L_n$ isn't the full operator; it's the reduction of the operator to the right eigenspace. 
+	
+	Without an inner product, there's no identification for $\psi_L^*$ and $\psi_R$.
+	
+	\subsubsection*{Quick Notes on Operators, Groups, and Tensors}
+	Tensor space: vector space defined as a tensor product between vector spaces, like $\mathcal{T} = V\otimes W$. Often, we care about tensor spaces of the form $\mathcal{T} = V^*\otimes\cdots\otimes V^*\otimes V^\otimes\cdots\otimes V$. If there are $p$ copies of $V$ and $q$ copies of $V^*$, a type $(p, q)$ tensor is an element $T\in\mathcal{T}$ and is said to have rank = $p+q$. There is a one-to-one correspondence between tensors thought of in this way and tensors thought of as multilinear maps: $T: V^*\times\cdots\times V^*\times V\times \cdots \times V\rightarrow F$. If we have a metric equipped to our tensor space, then, because the metric gives a correspondence between $V$ and $V^*$, the metric can rotate a tensor around a given rank. For instance, $T: V^*\times V\rightarrow \mathbb{R}$ is written here as a $(1, 1)$ tensor, but the given metric can define it equivalently as a $(2, 0)$ or $(0, 2)$ tensor. Linear maps like $H: V\rightarrow W$ can be thought of as $(1, 1)$ tensors because there's a homomorphism between tensors of that type and linear transformations. A linear transformation needs to be full rank to be interpreted as a change-of-basis transformation. In other words, $T$ is interpretable as a change-of-basis transformation iff it's an automorphism. Let $T$ be a change-of-basis transformation (interpretable as one, at least); then, by requiring an operator $A$ to be an abstract linear operator, $T$ must act on $A$ like $TAT^{-1}$ (this is also established by thinking of $A$ as a $(1, 1)$ tensor). By demanding $A$ be an abstract quadratic form, $T$ must act on $A$ as $T^\dagger A T$ (established by thinking of $A$ as a $(0, 2)$ tensor). If $T$ is unitary, $T^\dagger=T^{-1}$. 
+	
+	\subsubsection*{Groups}
+	A group representation of group $G$ onto a vector space $V$ is a map from $G$ to $GL(V)$ ($GL(V)$ is the space of all bijective linear transformations on $V$; all automorphisms on $V$, sometimes denoted Aut$(V)$.). End$(V)$, the space of all linear transformations on $V$ (the space of all endomorphisms on $V$) is itself a vector space. The conjugate representation of $G$ maps $G$ to $GL($End$(V))$. An automorphism $T$ act on End$(V)$ like $TAT^{-1}$, so the representation $\rho$ acts in the same way: $\rho(g) A \rho(g)^{-1}$ ($\forall$ $g\in G$).
+	
+	\subsubsection*{Vector Transformation vs Coordinate Transformation}
+	Let $V$ be a vector space and $\{e_i\}_i$ a basis for $V$. Suppose we have another basis $\{e_j\}_j$. Then the two are necessarily related by
+	$$
+	e_j' = M^i_{\; j}e_i,
+	$$
+	for some $\{M^i_{\; j}\in \mathbb{F}\}_{i,j}$. I.e., each new basis vector must be a linear combination of the old ones. Any $v\in V$ must be $v=v^i e_i$ for some $\{v_i \in \mathbb{F}\}_i$. Because the vector itself is unchanging as a mathematical object, $v=v'^{j}e_j'$. Thus,
+	$$
+	v = v'^jM^i_{\; j}e_i \rightarrow
+	$$
+	$$
+	v=v^ie_i=v'^jM^{i}_{\; j}e_i\rightarrow (v^i-v'^j M^i_{\; j})e_i=0.
+	$$
+	Since $e_i$ are linearly independent (they form a basis), $v^i-v'^j M^i_{\; j}=0$ individually. So, $v^i= M^i_{\; j}v'^j$. In matrix notation: $[v] = [M][v']$. $M$ is a change-of-basis matrix, so it must be full rank and therefore invertible (it's a map that takes one basis to another, so it should be). Thus, $[v']=[M^{-1}] [v]$: the coordinates transform with the inverse of the transformation that changes the basis. They transform \textit{contra-variantly}.
+	
+	Let $v\in V$ and $f\in V^*$. Then, $f(v)\in \mathbb{F}$ is a scalar. These are abstract mathematical objects. Their representation in a certain bases may change, but the objects never do. Thus, $f(v)\in \mathbb{F}$ must be the same regardless of what basis you represent it in. This forces the dual vector to transform opposite to the vector, as we now show: let $f=f_i e^i \in V^*$ with $e^i(e_j)=\delta^i_{\; j}$. The scalar $f(v)= v^if_i$ must remain unchanged under the transformation, by definition. If the coordinates transform as $v^i = M^i_{\; j}v'^j$, then
+	$$
+	f_iM^i_{\; j}v'^j = f_j'v'^j\rightarrow (f_i M^i_{\; j}-f_j)v'^j = 0.
+	$$
+	This needs to hold for all $v'\in V$. This means $f_i M^i_{\; j}=f_j$ $\forall$ $j$. This means $[f] = [f][M]$, treating $[f]$ as a row vector. So, $[v'] = [M^{-1}][v]$ and $[f'] = [f][M]$ ($[v], [v']$ column vectors; $[f], [f']$ row vectors). $M$ is what transforms the basis vectors; defined by $M(e_i)=M^i_{\; j}e_i=e'_j$). Covector coordinates transform with $M$ (covariantly) while vector coordinates transform with $M^{-1}$ (\textit{contra}-variantly). To check,
+	$$
+	f(v) = f_i v^i \rightarrow f'_i v'^i = (f_j M^j_{\; i})(M^{-1})^i_{\; k}v^k
+	$$ 
+	$$
+	= f_j \delta^j_{\; k} v^k = f_i v^i.
+	$$
+	
+	A left eigenvector $f$ of $A$ is defined by $f(Av) = \lambda f(v)$ $\forall$ $v \in V$. Choose a basis $e_i$ of $V$. A vector has components $v=v^i e_i$ (coordinates are $v^i$, which transform contravariantly). Dual vector (covector) has components $f = f_i e^i$, which transform covariantly.
+	$$
+	f(Av) = f_i e^i(A(e_j)v^j)=f_ie^i(A^k_{\; j}e_k v^j) = f_i A^k_{\; j} v^j e^i(e_k) = \delta^i_{\; k}f_i A^k_{\; j} v^j = f_i A^i_{\; j} v^j.
+	$$
+	And, if $f(Av) = \lambda f(v)$ $\forall$ $v \in V$, then
+	$$
+	f_i A^i_{\; j} v^j = \lambda f_j v^j \rightarrow (f_i A^i_{\; j} - \lambda f_j)v^j = 0 \rightarrow f_i A^i_{\; j} = \lambda f_j \rightarrow [f][A]=\lambda [f].
+	$$
+	
+	\subsubsection*{Projectors}
+	A projector	is an endomorphism $P: V\rightarrow V$ such that $P\circ P = P$. If $x\in$ Image$(P)$, then $Pa=x$ for some $a\in V$. Then, $Px = PPa = Pa = x$. This is true $\forall$ $x\in$ Image$(P)$, so $P$ acts as identity over its image subspace. For any $v\in V$, $v = Pv + (v - Pv)$. $Pv\in$Im($P$), and $v-Pv\in$ker$(P)$ because $P(v-Pv)=Pv-P^2v=Pv-Pv=0$. Thus, any $v$ can be written as $v=v_{Im}+v_{Ker}$: $V = Im(P) + Ker(P)$. Now, assume that $v\in Im(P)$ and $v\in Ker(P)$, then $Pv=0$ and $Pu=v$ for some $u$. Then, $0=Pv=PPu=Pu=v$. Thus, $Ker(P)\cap Im(P)=\{0\}$. Thus, $V=Im(P)\otimes Ker(P)$. An orthogonal projector under a specific inner product is a projector for which the range and kernel are orthogonal subspaces: i.e., $\forall$ $x, y\in V$, $\langle Px, (y-Py)\rangle=\langle(x-Px), Py\rangle=0$.
+\end{document}
