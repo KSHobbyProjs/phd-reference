@@ -17,12 +17,11 @@ This signature only includes primitive operations. Another commonly used definit
 \[
     \Sigma_{\text{field}} = \{\cdot^{(2)}, +^{(2)}, 0^{(0)}, 1^{(0)}, -^{(1)}, {^{-1}}^{(1)}\},
 \]
-where it's important to note that $^{-1}: F\;\backslash\;\{0\}\rightarrow F\;\backslash\;\{0\}$. We avoid using definition as, to us, the signature is there to specify the primitive operations of the language. Operations that are uniquely determined by these operations and the axioms need not be included as primitive operations, and including them can often complicate things. For example, there's the added issue that the multiplicative operation $^{-1}$ is \textit{technically} not a unary operation on $F$ as it's domain and image exclude the additive identity element $\{0\}\in F$. \linebreak
+where it's important to note that $^{-1}: F\;\backslash\;\{0\}\rightarrow F\;\backslash\;\{0\}$. We avoid using definition as, to us, the signature is there to specify the primitive operations of the language. Operations that are uniquely determined by these operations and the axioms need not be included as primitive operations, and including them can often complicate things. For example, there's the added issue that the multiplicative operation $^{-1}$ is \textit{technically} not a unary operation on $F$ as it's domain and image exclude the additive identity element $\{0\}\in F$.
 
-\noindent However, the motivation for the richer signature definition is as follows: the axioms are part of the structure, so operations implied by the axioms characterize the structure just as much as primitive operations do; as such, the signature should maybe include these operations.
-\linebreak
+However, the motivation for the richer signature definition is as follows: the axioms are part of the structure, so operations implied by the axioms characterize the structure just as much as primitive operations do; as such, the signature should maybe include these operations.
 
-\noindent\textbf{Vector space}: A vector space over a field $F$ is a non-empty set $V$ equipped with a binary operation $+: V\times V\rightarrow V$ (vector addition) and a binary function $\cdot:F\times V\rightarrow V$ (scalar multiplication, also often written as $\cdot(a, v) = a\cdot v=av$ for $a\in F$ and $v\in V$) that satisfy the following eight axioms (in the following, $a, b\in F$, and $u, v, w\in V$, and, unless otherwise stated, the following apply to all such elements in the sets):
+\textbf{Vector space}: A vector space over a field $F$ is a non-empty set $V$ equipped with a binary operation $+: V\times V\rightarrow V$ (vector addition) and a binary function $\cdot:F\times V\rightarrow V$ (scalar multiplication, also often written as $\cdot(a, v) = a\cdot v=av$ for $a\in F$ and $v\in V$) that satisfy the following eight axioms (in the following, $a, b\in F$, and $u, v, w\in V$, and, unless otherwise stated, the following apply to all such elements in the sets):
 \begin{itemize}
     \item Associativity of vector addition: $u+(v+w)=(u+v)+w$.
     \item Commutativity of vector addition: $u+v=v+u$.
@@ -39,7 +38,7 @@ A vector space over a field can be written as $(V, F, +_V, \cdot_V)$ where $V$ i
 \]
 Here, we've neglected the implied unary operations and only included primitive operations. The $\{\lambda^{(1)}:\lambda \in F\}$ is saying that for ever fixed scalar $\lambda\in F$, there is a unary operation $\lambda_V:V\rightarrow V$, $v\mapsto \lambda v$. Further, we treat the fixed field $F$ as external, which is why this signature neglects the operations defining the field $F$ itself. If one wanted the signature to instead represent the entire coupled structure, rather than treating $F$ as fixed external data, one could instead use a two-sorted signature containing the field operations on $F$, the vector space operations on $V$, and the scalar multiplication $F\times V\rightarrow V$. We neglect to do this as, for our purposes, this level of detail is pedantic and has diminishing returns.
 
-\section{General Properties of Vector Spaces}q
+\section{General Properties of Vector Spaces}
 Let $V$ be a vector space over field $F$.
 \begin{itemize}
     \item Linear combination: a linear combination of a set of vectors $\{v_1, v_2,\dots,v_n\}$ in $V$ is a vector of the form $a_1v_1+a_2v_2+\dots+a_n v_n$ for some $a_1, a_2, \dots, a_n\in F$.
@@ -64,6 +63,7 @@ Let $V$ be a vector space over field $F$.
     \item For a finite-dimensional vector space of dimension $n$, any subset with greater than $n$ elements must be linearly dependent (but \textit{can} span the space), and any subset with less than $n$ elements must not span the space (but \textit{can} be linearly independent).
     \item If two spaces have the same dimension, then there is necessarily an isomorphism uniting them, and they're said to be isomorphic.
     \item There can exist a notion of a basis in infinite-dimensional vector spaces, but many pleasant theorems assume we're working with a finite-dimensional space.
+    \item Direct sum: if $W, U\subseteq V$ are subspaces of vector space $V$, their sum is the subspace $W+U=\{w + u \;|\; w\in W\text{ and } u\in U\}.$ If $W\cap U=\{0\}$, then the sum is called a direct sum and is denoted $W\oplus U$. In that case, every vector in $W\oplus U$ can be uniquely written as a sum $w + u$ with $w \in W$, $u\in U$ unique. If $V=W\oplus U$, then $W\oplus U$ is a direct sum decomposition of $V$.
 \end{itemize}
 
 \section{Linear Maps}
@@ -107,7 +107,7 @@ is called a column vector or the coordinate vector of $v$ in the basis $E$. Some
 \]
 
 
-\noindent Let $E$ be a basis for $V$ and let $E'$ be a basis for another vector space $W$ of dimension $m$. Then, the action of the linear map $T: V\rightarrow W$ can be expressed as
+Let $E$ be a basis for $V$ and let $E'$ be a basis for another vector space $W$ of dimension $m$. Then, the action of the linear map $T: V\rightarrow W$ can be expressed as
 \begin{align}
     T(v) = w&\rightarrow T\left( \sum_{i=1}^n a_ie_i\right) = w\\
     & \sum_{i=1}^n a_i T(e_i) = w.
@@ -144,9 +144,9 @@ From this, it's clear that the matrix
         T_{m1} & T_{m2} & \cdots & T_{mn}
     \end{pmatrix}
 \]
-is the matrix form of the transformation in the basis $E$ and $E'$ $[T]_{E\rightarrow E'}$, and the columns of this matrix $[T(e_i)]_{E'}$. \\
+is the matrix form of the transformation in the basis $E$ and $E'$ $[T]_{E\rightarrow E'}$, and the columns of this matrix $[T(e_i)]_{E'}$.
 
-\noindent One can see this more formally by treating $E$ and $E'$ as tuples: $(E) = (e_1, \dots, e_n)$ and $(E')=(e'_1, \dots, e'_m)$ and extending $T$ component-wise across the tuple: $TE:=(T(e_1), \dots, T(e_n))$. Using the coordinate isomorphism associated with $E'$: $\phi_{E'}: F^m\rightarrow W$, we can extend the inverse across the tuple $TE$:
+One can see this more formally by treating $E$ and $E'$ as tuples: $(E) = (e_1, \dots, e_n)$ and $(E')=(e'_1, \dots, e'_m)$ and extending $T$ component-wise across the tuple: $TE:=(T(e_1), \dots, T(e_n))$. Using the coordinate isomorphism associated with $E'$: $\phi_{E'}: F^m\rightarrow W$, we can extend the inverse across the tuple $TE$:
 \[
     \phi^{-1}_{E'}(TE) = ([T(e_1)]_{E'}, \dots, [T(e_n)]_{E'}).
 \]
@@ -175,9 +175,9 @@ Here are some general properties of linear maps:
         \item If $T$ is an isomorphic endomorphism, $T:V\rightarrow V$, then $T$ can be thought of as a change-of-basis transformation: a transformation that leaves the fundamental vector unchanged and just changes the basis its represented in. This is just an interpretation. $T$ can be thought of as active: a transformation actively changing the input vector, or a passive transformation: a transformation that leaves the vector unchanged but transforms the basis it's represented in. If the transformation isn't full-rank, this
     \end{itemize}
     \item Eigenspace: The $\lambda$-eigenspace of $T$ is the set $E_\lambda=\{v\in V\;|\;T(v)=\lambda v\}$ or, identically, $E_\lambda=$ker$(T-\lambda I)$.
-    \item Determinant:
-    \begin{itemize}
-        \item det$(AB)$ = det$(A)$det$(B)$.
-        \item $T$ is invertible iff det$T\ne 0$ (which implies rank$T< n$, so the determinant detects whether an endomorphism loses a dimension).
-    \end{itemize}
+    \item Determinant: $T$ is invertible iff det$T\ne 0$ (which implies rank$T< n$, so the determinant detects whether an endomorphism loses a dimension).
 \end{itemize}
+\section{Eigenvectors}
+\section{Determinant}
+\section{Inner product and normed vector spaces}
+\section{Hilbert and Banach spaces}

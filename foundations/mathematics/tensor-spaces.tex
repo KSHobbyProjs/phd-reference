@@ -1,0 +1,15 @@
+\chapter{Tensor Spaces}
+\textbf{Cartesian product}: the Cartesian product of sets $A$ and $B$ is the set denoted $A\times B$ including all ordered pairs $(a, b)$ where $a\in A$ and $b\in B$: $A\times B =\{(a, b) \;|\; a\in A\text{ and } b\in B\}$.
+\textbf{Tensor product}: the tensor product of vector spaces $V$ and $W$ (both over the field $\mathbb{F}$) is the vector space, denoted $V\otimes W$, wherein the set of elements is the Cartesian product $V \times W$, and vector addition are defined according to $V$ and $W$, applied component-wise. In other words, there is a bilinear map $V\times W\rightarrow V\otimes W$ that maps $(v, w)$ ($v\in V, w\in W$) to an element $v\otimes w \in V\otimes W$. This is guaranteed to be a vector space, by construction. We often look at tensors that are combinations of a vector space and its dual, like
+$$
+	\mathcal{T} = V^*\otimes \cdots \otimes V^* \otimes V\otimes \cdots \otimes V^*
+$$
+If there are $p$ copies of $V^*$ and $q$ copies of $V$, then $T\in\mathcal{T}$ is called a type $(p, q)$ tensor. There is a one-to-one correspondence between tensors thought of in this way and tensors thought of as linear maps:
+$$
+	T = V^*\times \cdots \times V^* \times V\times\cdots\times V\rightarrow \mathbb{F}.
+$$
+\section{Transformation Laws}
+\section{Examples of Tensors}
+Linear transformations are type $(1, 1)$ tensors. Bilinear forms are type $(0, 2)$ tensors.
+\section{Adding a Dual Correspondence}
+\subsection{Metric Tensor}

@@ -1,0 +1,22 @@
+\chapter{Topological Spaces}
+\begin{definition}[Topological Space]
+	A topology on set $X$ is defined as a collection $\tau$ of subsets of $X$ (called open sets) satisfying:
+	\begin{enumerate}
+		\item $\{0\}, X\in \tau$
+		\item Arbitrary unions of members of $\tau$ belongs to $\tau$
+		\item Finite intersections of members of $\tau$ belongs to $\tau$
+	\end{enumerate}
+\end{definition}
+A \textbf{neighborhood} of a point $x\in X$ is any open set containing $x$ (some define a neighborhood of $x$ as any set that contains an open set that contains $x$, but this feels unintuitive to me).
+\begin{definition}[Continuous function]
+	A function $f: X\rightarrow Y$ between topological spaces $(X,\tau_X), (Y,\tau_Y)$ is called continuous at $x\in X$ if for every neighborhood $N\in \tau_Y$ of $f(x)$, there is a neighborhood $M\in \tau_X$ of $x$ such that $f(M)\subseteq N$. If $f$ is continuous $\forall$ $x\in X$, then $f$ is simply called continuous.
+\end{definition}
+\begin{definition}[Homeomorphism]
+	A function $f: X\rightarrow Y$ between two topological spaces is called a homeomorphism if:
+	\begin{enumerate}
+		\item $f$ is a bijection
+		\item $f$ is continuous
+		\item $f^{-1}$ is continuous
+	\end{enumerate}
+\end{definition}
+\section{Manifolds}

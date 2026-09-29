@@ -1,4 +1,65 @@
-\chapter{Hierarchies}
+\chapter{Hierarchies of Mathematical Structures}
+Before we get into specific mathematical structures, it's helpful to note that many mathematical structures are more specific versions of other ones.
 \section{Algebraic}
-\section{Topologial}
-Topological spaces -> metric spaces -> normed vector spaces -> inner product spaces -> continuum version of each: Banach space, Hilbert space
+\begin{itemize}
+	\item \textbf{Magma}: A set with a binary operation (no requirement beyond closure).
+	\item \textbf{Semigroup}: A magma but where the binary operation is associative. 
+	\item\textbf{Monoid}: A semigroup with an identity element (a "do nothing" operation).
+	\item\textbf{Group}: A monoid with an additional inverse element for each element (for every element, there is an element that undoes that element under the action of the binary operation).
+	\item\textbf{Abelian Group}: A group where the binary operation is also commutative.
+	\item\textbf{Ring}: An abelian group with an additional binary operation (call it multiplication) that is associative and distributes over the abelian group's natural operation.
+	\item\textbf{Commutative Ring}: A ring where the multiplicative operation is commutative.
+	\item \textbf{Integral Domain}: A commutative ring with no zero divisors. I.e., if $ab = 0$, then $a=0$ or $b=0$ (this establishes that ring multiplication acts similarly to ordinary number multiplication, when it normally doesn't have to).
+	\item \textbf{Field}: An integral domain with multiplicative inverses for all nonzero elements.
+\end{itemize}
+$$
+	\text{Abelian Group}  \subset \text{Group}  \subset  \text{Monoid}  \subset  \text{Semigroup}  \subset  \text{Magma}
+$$
+$$
+	\text{Field} \subset \text{Integral Domain} \subset \text{Ring}  \subset \text{Abelian Group}.
+$$
+Note that a ring is an example of an abelian group (in that it contains an abelian group within it), but it's better thought of as its own object: it's an abelian group with an entirely new operation equipped to it, and rings are usually thought of intuitively as a different object than a group.
+\begin{itemize}
+	\item\textbf{Module}: an abelian group $M$ and a ring $R$ equipped with a map $*: R\times M\rightarrow M$ (often called scalar multiplication: the members of the group can be "multiplied" by the elements of $R$) subject to specific to compatibility conditions like
+	\begin{align*}
+		r(m_1 + m_2) &= rm_1 + rm_2,\\
+		(r_1 + r_2)m &= r_1m + r_2m,\\
+		(r_1r_2)&m=r_1(r_2m)
+	\end{align*}
+	\item\textbf{Vector space}: a module where the ring is a field.
+	\item\textbf{Algebra}: An algebra over a field $F$ is a vector space over $F$ with an additional operation $V\times V\rightarrow V$ (multiplication between vectors) such that 
+	\begin{align*}
+		(a + b)c &= ac + bc,\\
+		a(b+c) &= ab + ac,\\
+		(\lambda a)b& = \lambda(ab) = a(\lambda b)
+	\end{align*}
+\end{itemize}
+Thus,
+$$
+	\text{Algebra}\subset \text{Vector Space}\subset \text{Module}.
+$$
+\section{Topological}
+\begin{itemize}
+	\item\textbf{Topological space}: a space equipped with enough structure to talk about which points are "near" each other in a qualitative sense, without specifying how near they are.
+	\item\textbf{Metric space}: a space equipped with a notion of "distance" between each member of the set. The metric induces a natural topology (called the metric topology), so a metric space is a topological space.
+	\item\textbf{Normed Vector space}: a vector space (see next chapter) equipped with a norm (a function that gives a notion of "length" for the vectors in the space). A norm induces a metric ($d(u, v) = ||u-v||$), so a normed vector space is a metric space is a topological space.
+	\item\textbf{Inner Product space}: a vector space equipped with an inner product, which gives a notion of length and angles between vectors. An inner product induces a norm $||u|| = \sqrt{\langle u, u\rangle}$, so an inner product space is a normed vector space is a metric space is a topological space.
+	\item\textbf{Banach space and Hilbert space}: a Banach space is a "complete" normed vector space and a Hilbert space is a "complete" inner product space. Completeness is a statement that the space contains all points that the space's own notion of convergence says should exist (more on this below).
+\end{itemize}
+So, 
+\begin{align*}
+	\text{Inner Product space} &\subset &\text{Normed Vector Space} &\subset &\text{Metric Space} &\subset &\text{Topological Space} \\
+	\downarrow & & \downarrow & & & & \\
+	\text{Hilbert Space} & & \text{Banach Space} & & & & 
+\end{align*}
+
+Lastly, we briefly cover manifolds (although these are just examples of topological spaces with extra structures, they're important).
+\begin{itemize}
+	\item\textbf{Topological Manifold}: A topological space in which every member of the set locally resembles $\mathbb{R}^n$.
+	\item\textbf{Smooth Manifold}: A manifold with a notion of differentiability. This allows us to define $T_pM$, the tangent space at $p$, which is a vector space.
+	\item\textbf{Riemannian Manifold}: A smooth manifold such that every tangent space comes equipped with an inner product (the metric tensor). This allows us to define lengths and angles in a new, deformed space.
+\end{itemize}
+
+$$
+	\text{Riemannian Manifold} \subset \text{Smooth Manifold} \subset \text{Topological Manifold}
+$$

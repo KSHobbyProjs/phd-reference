@@ -1,0 +1,28 @@
+\chapter{Groups}
+\begin{definition}[Group]
+	A group is a set $G$ with a binary operation on $G$, $\cdot: G\times G\rightarrow G$ such that
+	\begin{enumerate}
+		\item Associativity: $\forall$ $a, b, c\in G$, $(a\cdot b)\cdot c = a\cdot(b\cdot c).$
+		\item Identity element: $\exists$ $e\in G$ s.t. $\forall$ $g \in G$, $e\cdot g=g$ and $g\cdot e=g$. This element is unique.
+		\item Inverse element: $\forall$ $g\in G$, $\exists$ $g'\in G$ s.t. $g\cdot g'=e$ and $g'\cdot g=e$ where $e$ is the identity element. For each $g\in G$, the element $g'$ is unique. It's called the inverse of $g$ and is often denoted $g^{-1}$.
+	\end{enumerate} 
+\end{definition}
+\begin{definition}[Group Homomorphism]
+	Given two groups $(G, *)$ and $(H, \cdot)$, a group homomorphism from $(G, *)$ to $(H, \cdot)$ is a function $h: G\rightarrow H$ s.t.
+	$$
+		h(u*v) = h(u)\cdot h(v) \quad \forall \; u, v\in G.
+	$$
+\end{definition}
+From this, it can be deduced that $h(e_G)=e_H$ and $h(u^{-1})=h(u)^{-1}$, so $h$ is "compatible with the group structure", just as every homomorphism should be compatible with the underlying structure.
+\section{Representations}
+\begin{definition}[Representation]
+	A representation of a group $G$ on a vector space $V$ over field $\mathbb{F}$ is a group homomorphism $\rho: G\rightarrow GL(V)$ ($GL(V)$ is the group of all automorphisms on $V$, with functional composition as the group operation). I.e.,
+	$$
+		\rho(g_1g_2)=\rho(g_1)\rho(g_2) \quad \forall\; g_1, g_2\in G.
+	$$
+\end{definition}
+For a representation $\rho$ over vector space $V$, a subspace $W\subset V$ is called $G$-invariant if $\rho(g)W\subseteq W$ $\forall$ $g\in G$.
+\begin{definition}[Irreducible Representation]
+	A representation $\rho$ over vector space $V$ is called irreducible if the only invariant subspaces are $W=\{0\}$ and $W=V$.
+\end{definition}
+\section{Lie Groups}
