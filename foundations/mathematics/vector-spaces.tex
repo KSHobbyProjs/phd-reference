@@ -180,4 +180,20 @@ Here are some general properties of linear maps:
 \section{Eigenvectors}
 \section{Determinant}
 \section{Inner product and normed vector spaces}
+An inner product space is a vector space $V$ over a field $\mathbb{F}=\mathbb{R},\mathbb{C}$ equipped with a binary operation $\langle ., .\rangle: V\times V\rightarrow \mathbb{F}$, called the inner product, satisfying the following properties:
+\begin{enumerate}
+	\item Conjugate symmetry: $\langle x, y\rangle = \overline{\langle y, x\rangle}$.
+	\item Linearity in the first argument: $\langle ax + by, z\rangle = a\langle x, z\rangle + b\langle y, z\rangle$.
+	\item Positive-definiteness: if $x \ne 0$, then $\langle x, x\rangle > 0$. 
+\end{enumerate}
+A few basic properties of the inner product:
+\begin{itemize}
+	\item $\langle 0, x\rangle = \langle x, 0\rangle = 0.$
+	\item $\langle x, x\rangle$ is real and non-negative.
+	\item $\langle x, x\rangle = 0$ iff $x=0$.
+	\item $\langle x, ay + bz\rangle = \overline{a}\langle x, y\rangle +\overline{b}\langle x, z\rangle$ (conjugate-linearity in the second argument).
+\end{itemize}
+Since $\langle ., .\rangle$ is linear in the first argument and conjugate-linear in the second argument (as the last property shows), the inner product is a sesquilinear form. If $\mathbb{F}=\mathbb{R}$, conjugate symmetry reduces to symmetry, and sesquilinear reduces to bilinear. Occasionally, it's useful to relax the positive-definite criterion to positive-semidefinite: $\langle x, x\rangle \ge 0$. This defines a positive, semi-definite Hermitian form.
+\subsubsection{Adjoint}
+The adjoint of an operator $A$ is defined as the operator $A^\dagger$ such that $\langle A^\dagger x, y\rangle = \langle x, Ay\rangle$ $\forall $ $x, y\in V$. An isometry is a linear map $T: V\rightarrow H$ that preserves inner products: $\langle Tx, Ty\rangle = \langle x, y\rangle$. Using the definition of the adjoint, we see that this requires $\langle T^\dagger Tx, y\rangle = \langle x, y\rangle$. Requiring this hold $\forall$ $x, y\in V$ establishes that $T^\dagger T = I$.
 \section{Hilbert and Banach spaces}
