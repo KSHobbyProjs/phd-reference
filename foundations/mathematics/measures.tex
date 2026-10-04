@@ -1,0 +1,44 @@
+\chapter{Measures}
+Measures and measure spaces are designed to generalize the notion of "size" or "volume" for sets. A $\sigma$-algebra of a set $X$ is a subset of $X$ that is suitably measurable. 
+\begin{definition}[$\sigma$-algebra]
+	Let $X$ be a set and let $P(X)$ be its power set (the set of all subsets of $X$). Then, a subset $\Sigma \subseteq P(X)$ is called a $\sigma$-algebra if
+	\begin{enumerate}
+		\item $X\in \Sigma$
+		\item $\Sigma$ is closed under complementation.
+		\item $\Sigma$ is closed under countable unions.
+	\end{enumerate}
+\end{definition}
+The idea being: if we can measure the "size" of $W\subset X$, we should immediately know the "size" of $X\;\backslash \;W$. Further, if we know the "size" of a number of subsets, we should be able to tell the "size" of them added together. Notably, we'd like to be able to find the "size" of countably infinite measurable sets added together. These axioms then imply $\null\in \Sigma$ and closure under countable intersections. Note: this definition is very similar to that of a topology, except topologies don't care about complements at all. A notion of "closeness" doesn't really restrict how the complement behaves (in a direct way), but a notion of a "measurable set" certainly does. 
+\begin{definition}[Borel $\sigma$-algebra]
+	The Borel $\sigma$-algebra over a topological space $X$ is the smallest $\sigma$-algebra one can construct that contains all the open sets defined by the topology.
+\end{definition}
+Now, we want a way to "measure the size" of sets. We do this with a function called the measure.
+\begin{definition}[Measure]
+	Let $X$ be a set and $\Sigma$ a $\sigma$-algebra over $X$. A function $\mu: \Sigma \rightarrow [0, +\infty]$ ($[0, +\infty]$ is the set of non-negative real numbers together with an element $+\infty$ that is used to denote elements greater than all other (so-called finite) elements) is called a measure if
+	\begin{enumerate}
+		\item $\mu(\emptyset) = 0$
+		\item Countable additivity: $\forall$ countable collections ${E_k}_{k=1}^\infty$ of pairwise disjoint sets in $\Sigma$,
+		$$
+			\mu\left( \bigcup_{k=1}^\infty E_k\right) = \sum_{k=1}^\infty \mu(E_k).
+		$$
+	\end{enumerate}
+\end{definition}
+The pair $(X, \Sigma)$ is called a measurable space, and the triple $(X, \Sigma, \mu)$ is called a measure space. 
+\section{Lebesgue Integration}
+With this new notion of a "measure", we can discuss integration of a function $f: X\rightarrow Y$ over a set $X$:
+$$
+	\int_X f \; d\mu_X.
+$$
+\subsection{Indicator Functions}
+\subsection{Non-negative Simple Functions}
+\subsection{General Non-negative Functions}
+\subsection{Projection Valued Measure}
+A topological space $X$ is separable if it contains a countable dense subset. Take $U$ to be this countable dense subset of $X$. Then, any $x\in X$ can be arbitrarily well approximated by a countable series in $U$. Let $\mathcal{H}$ be a separable complex Hilbert space (separability is vital for things like Fourier expansions). Let $(X, M)$ be a measurable space consisting of a set $X$ and a Borel $\sigma$-algebra $M$ on $X$. A projection valued measure $\pi$ is a map from $M$ to the set of bounded (bounded: $\exists$ $C>0$ such that $\forall v\in V$, $||Av|| \le C||v||$, but it implies continuity for a separable Hilbert space) self-adjoint operators on $\mathcal{H}$ such that
+\begin{enumerate}
+	\item $\pi(E)$ is an orthogonal projection $\forall$ $E\in M$.
+	\item $\pi(\emptyset) = 0$ and $\pi(X) = I$.
+	\item If $E_1, E_2, \dots$ in $M$ are disjoint, then $\forall$ $v\in\mathcal{H}$,
+	$$
+		\pi\left(\bigcup^\infty_{j=1}E_j\right)v = \sum_{j=1}^\infty \pi(E_j)v
+	$$
+\end{enumerate}

@@ -1,0 +1,80 @@
+\chapter{Inner Product Spaces}
+An inner product space is a vector space $V$ over a field $\mathbb{F}=\mathbb{R},\mathbb{C}$ equipped with a binary operation $\langle ., .\rangle: V\times V\rightarrow \mathbb{F}$, called the inner product, satisfying the following properties:
+\begin{enumerate}
+	\item Conjugate symmetry: $\langle x, y\rangle = \overline{\langle y, x\rangle}$.
+	\item Linearity in the first argument: $\langle ax + by, z\rangle = a\langle x, z\rangle + b\langle y, z\rangle$.
+	\item Positive-definiteness: if $x \ne 0$, then $\langle x, x\rangle > 0$. 
+\end{enumerate}
+A few basic properties of the inner product:
+\begin{itemize}
+	\item $\langle 0, x\rangle = \langle x, 0\rangle = 0.$
+	\item $\langle x, x\rangle$ is real and non-negative.
+	\item $\langle x, x\rangle = 0$ iff $x=0$.
+	\item $\langle x, ay + bz\rangle = \overline{a}\langle x, y\rangle +\overline{b}\langle x, z\rangle$ (conjugate-linearity in the second argument).
+\end{itemize}
+Since $\langle ., .\rangle$ is linear in the first argument and conjugate-linear in the second argument (as the last property shows), the inner product is a sesquilinear form. If $\mathbb{F}=\mathbb{R}$, conjugate symmetry reduces to symmetry, and sesquilinear reduces to bilinear. Occasionally, it's useful to relax the positive-definite criterion to positive-semidefinite: $\langle x, x\rangle \ge 0$. This defines a positive, semi-definite Hermitian form. The inner product induces a norm $||\cdot||_V: V\rightarrow \mathbb{R}$ via $||v||_V = \sqrt{\langle v, v\rangle }$. This norm induces a metric $d_V: V\times V\rightarrow \mathbb{R}$ via $d_V(v, u) = ||v - u ||_V$. This metric induces a topology, called the metric topology.
+\subsection{Projectors}
+$P: V\rightarrow V$ such that $P^2=P$ (idempotent). Then, $V=Im(P) \oplus Ker(P)$, $P|_{Im(P)} = I_{Im(P)}$. Orthogonal projector: a projector such that $Im(P)$ and $Ker(P)$ are orthogonal subspaces.
+\subsection{Isometries}
+Map that preserves inner products (more generally, maps that preserve the metric). For an inner product space, $T$ is an isometry if $\langle Tx, Tx\rangle = \langle x, x\rangle$ $\forall$ $x\in V$. This forces $\langle Tx, Ty\rangle = \langle x, y\rangle$ $\forall$ $x,y\in V$. This forces $T^\dagger T=I$. Notably, unless $Im(T)=V$, $TT^\dagger\ne I$ (the isometry need be injective, but it need not be surjective). It can be shown that $TT^\dagger$ is an orthogonal projector onto $Im(T)$.
+
+\section{Hilbert and Banach spaces}
+\subsection{Finite Dimensions}
+	First, we discuss finite dimensional Hilbert spaces and the theorems that follow.
+	\begin{theorem}[Finite dimensional inner product spaces are Hilbert spaces]
+		Every finite dimensional inner product space over $\mathbb{R}$ or $\mathbb{C}$ is a Hilbert space (under the standard induced topology).
+	\end{theorem}
+	\begin{theorem}[Adjoint Exists and is Unique]
+		For any operator $A$ on a finite dimensional Hilbert space $\mathcal{H}$, there exists a unique operator $A^\dagger$, called the adjoint, such that $\langle y, Ax\rangle = \langle A^\dagger y, x\rangle$ $\forall$ $x, y\in\mathcal{H}$ as long as the inner product is non-degenerate.
+	\end{theorem}
+	\begin{theorem}[Spectral Theorem]
+			Let $\mathcal{H}$ be a finite-dimensional Hilbert space over $\mathcal{C}$ with dimension $n$. Every Hermitian $A$ can be written as $A = UDU^\dagger$ with $U$ unitary and $D$ real diagonal. Equivalently, $A = \sum_i \lambda_i P_i$ with real $\lambda_i$ and mutually orthogonal projections $P_i$ that sum to $\mathbb{I}$.
+		\begin{lemma}
+			An eigenvalue for $A$ exists.
+		\end{lemma}
+		\begin{proof}
+			The characteristic polynomial $\det(A - \lambda\mathbb{I})$ has degree $m\ge 1$. By the fundamental theorem of algebra, it must have at least one root $\lambda \in \mathbb{C}$. At that root, $A-\lambda \mathbb{I}$ is singular, so $\ker B\ne\{0\}$. I.e., some $v\ne 0$ satisfies $Av=\lambda v$.
+		\end{proof}
+		\begin{lemma}
+			Eigenvalues of $A$ are real.
+		\end{lemma}
+		\begin{proof}
+			Let $v$ be an eigenvector of $A$ with corresponding eigenvalue $\lambda$. Then, $\langle v, Av\rangle = \lambda \langle v, v\rangle$. Since $A$ is Hermitian, $\langle v, Av\rangle =\langle A^\dagger v, v\rangle = \langle A v, v\rangle = \lambda^*\langle v, v\rangle$. So, $\lambda\langle v, v\rangle = \lambda^*\langle v, v\rangle$. $\langle v, v\rangle$ is only equal to zero if $v = 0$ and $v\ne 0$ by definition of an eigenvector, so $\langle v, v\rangle\ne 0$ and thus $\lambda^* = \lambda$. Thus, $\lambda \in \mathbb{R}$. 
+		\end{proof}
+		\begin{lemma}
+			The orthogonal complement of a subspace $W$ is the set of all vectors that are orthogonal to every single vector in $W$. It's often denoted $W^\perp$. The orthogonal complement of an eigenspace is invariant under $A$. Let $w$ be a single eigenvector. Then, $A$ restricted to $w^\perp$ is again Hermitian, now on a space of dimension $n-1$.
+		\end{lemma}
+		\begin{proof}
+			Let $V$ the eigenspace of $A$ associated with $\lambda$. Then, if $w \in V^\perp$ and $v\in V$, $\langle v, w\rangle= 0$. $A$ is Hermitian, so $\langle v, Aw\rangle = \langle Av, w\rangle=\lambda\langle v, w\rangle=0$. So, if $w\in V^\perp$, then $Aw \in V^\perp$. In other words, the orthogonal complement of an eigenspace is invariant under the action of $A$. 
+			
+			Let $v\ne 0$ and consider the linear functional defined by $\phi(x):=\langle v, x\rangle$ $\forall$ $x\in \mathcal{H}$. Then, $v^\perp = \ker \phi$, by definition. $\phi$ is not the zero functional because $\phi(v) = ||v||^2\ne 0$. Thus, the range of $\phi$ is a nonzero subspace of $\mathbb{C}$ (which must of course be all of $\mathbb{C}$) and $\dim\range \phi=1$. By rank-nullity theorem, $\rank \phi + \nullity\phi = n$, so $\dim\ker \phi = \dim v^\perp = n-1$ (any non-zero linear functional has a $\rank=1$ and $\dim\ker\phi = n-1$. Basically, this statement is just saying that a linear functional collapses a vector space with dimension $n$ to one with dimension $1$, so, as long as it's nonzero, it must kill off $n-1$ dimensions). Thus, $v^\perp$ is an $n-1$-dimensional subspace of $\mathcal{H}$.
+			
+			$A|_{v^\perp}$, well defined since $A$ maps $v^\perp$ to $v^\perp$, is of course still Hermitian: $\langle y, Ax\rangle = \langle A y, x\rangle$ $\forall$ $x,y\in \mathcal{H}$, so $\langle u, A|_{v^\perp}w\rangle = \langle A|_{v^\perp} u, w\rangle$ $\forall$ $u, w\in v^\perp\subset \mathcal{H}$.
+		\end{proof}
+		Now, we induct.
+		
+		\textbf{Statement $P(n)$}: for every complex inner product space $V$ of dimension $n$, and every Hermitian $A: V\rightarrow V$, there is an orthonormal basis of $V$ consisting of eigenvectors of $A$, and all of the eigenvalues are real. 
+		
+		\textbf{Base case ($n=1$):} Pick any unit vector $e$. Since $V=\spans{e}$, $Ae = ce$ for some $c\in\mathbb{C}$. So, $e$ is an eigenvector and $\{e\}$ is an orthonormal basis. Hermiticity guarantees $c$ real.
+	
+		\textbf{Assume $P(n-1)$, prove $P(n)$:} Let $\dim V=n$ an let $A$ be Hermitian on $V$. By the first lemma, $A$ has at least one eigenpair, $(v, \lambda)$. If it has multiple, choose one. Then normalize $e_1:=v/||v||$. By the second lemma, $\lambda\in\mathbb{R}$. Now, split the space: let $W:= e_1^\perp$. Then, $V=\spans(e_1)\oplus W$, and $\dim W = n-1$. Equip $W$ with the inner product inherited from $V$. Then, $W$ is an $(n-1)$-dimensional inner product space. By the third lemma, $A_W:=A|_W:W\rightarrow W$, the restriction of $A$ onto $W$, is a well-defined operator (it maps $W$ to $W$), and it's Hermitian on $W$. Since $P(n-1)$, $W$ has an orthonormal basis $\{e_2, \dots, e_n\}$ with $A_We_j = \lambda_j e_j$ and $\lambda_j\in\mathbb{R}$. Since $A_We_j = Ae_j$, these are eigenvectors of $A$ itself. $e_2, \dots, e_n$ are orthonormal and each lie in $W=e_1^\perp$, so each is orthogonal to $e_1$. Thus, $e_1, e_2,\dots, e_n$ are orthonormal, meaning they're linearly independent. $\dim V=n$, and $e_1, e_2, \dots, e_n$ form $n$, linearly-independent vectors in $V$. Thus, $\{e_1, e_2, \dots, e_n\}$ form an orthonormal basis in $V$ and $Ae_i = \lambda e_i$ with $\lambda\in\mathbb{R}$. This proves $P(n)$.
+	\end{theorem}
+	
+	$V = \bigoplus_{i=1}^n \spans(e_i)$. Place $e_i$ as the columns of $U$. Then, $U$ is unitary, and $A = UDU^\dagger$ with $D=\diag(\lambda_1, \lambda_2, \dots, \lambda_n)$ (note that nothing is currently forcing the eigenvalues to be distinct). Define the orthogonal projector $P_k:=\sum_{i:\lambda_i=\mu_k} \ket{e_i}\bra{e_i}$. Then, $A = \sum_k \mu_k P_k.$ Lastly, let $E_k:=\ker(A-I\mu_k)=\range P_k$. Then, $V=\bigoplus_{i=1} E_i$. This can be seen by noting that $E_k = \bigoplus_{i: \lambda_i=\mu_k} \spans(e_i)$. And, since distinct eigenvalues result in orthogonal eigenvectors, $E_k \cap E_{k'}=\{0\}$ for $k=k'$. 
+	
+	We can write this in measure notation using the following. Take $M$ to be the Borel sets of $\mathbb{R}$. Then, define $E:=E(\Delta) = \sum_{i: \lambda_i \in \Delta} P_i$ $\forall$ $\Delta\in M$. $V$ is finite-dimensional, so it's necessarily separable. All finite-dimensional operators are bounded, so $E(\Delta)$ is bounded. $E(\Delta)$ is a sum of mutually orthogonal projections, so $E(\Delta)$ is an orthogonal projection. $E(\Delta)$ is a sum of self-adjoint operators, so $E(\Delta)$ is a self-adjoint operator. $E(0) = 0$ since no eigenvalue is zero. $E(\mathbb{R})=\sum_i \lambda_iP_i=I$ since $V$ is a direct sum of the eigenspaces. If $E_1, E_2, \dots$ in $M$ are disjoint, then $\forall v\in V$,
+	$$
+		E\left(\tilde{E}=\bigcup_{j=1}^\infty E_j\right)v =\left(\sum_{j: \lambda_j\in\tilde{E}}P_i \right) v= \sum_{j=1}^\infty \sum_{k: \lambda_k \in E_j}P_k v= \sum_{j=1}^\infty E(E_j)v.
+	$$
+	Thus, $E$ is a projection-valued measure on $V$. Define $\lambda: \mathbb{R}\rightarrow\mathbb{R}$ such that $\lambda = \sum_i \lambda_i I_{\lambda_i}$ (that is, a sum of indicator functions). $\lambda$ is a measurable function, and
+	$$
+		A = \int_\mathbb{R} \lambda dE = \sum_i \lambda_i P_i.
+	$$
+	
+
+\subsection{Infinite Dimensions}
+\subsection{Spectral Theorem}
+	If $A$ is a densely-defined, bounded, self-adjoint operator on a separable Hilbert space $\mathcal{H}$, then $\exists$ a unique projection-valued measure $E$ on the Borel $\sigma$-algebra of $\mathbb{R}$ such that
+	$$
+		A = \int_\mathbb{R} \lambda dE(\lambda).
+	$$

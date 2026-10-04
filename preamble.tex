@@ -30,6 +30,7 @@
 % theorem environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}[chapter]
+\newtheorem{lemma}{Lemma}[theorem]
 
 % custom commands
 \newcommand\be{\begin{equation}} % start equation env 
@@ -42,3 +43,9 @@
 
 \newcommand{\outvec}{\ket{\psi_\text{out}}}
 \newcommand{\invec}{\ket{\psi_\text{in}}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\range}{Ran}
+\DeclareMathOperator{\spans}{span}
+\DeclareMathOperator{\diag}{diag}

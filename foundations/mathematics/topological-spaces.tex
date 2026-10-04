@@ -11,6 +11,7 @@ A \textbf{neighborhood} of a point $x\in X$ is any open set containing $x$ (some
 \begin{definition}[Continuous function]
 	A function $f: X\rightarrow Y$ between topological spaces $(X,\tau_X), (Y,\tau_Y)$ is called continuous at $x\in X$ if for every neighborhood $N\in \tau_Y$ of $f(x)$, there is a neighborhood $M\in \tau_X$ of $x$ such that $f(M)\subseteq N$. If $f$ is continuous $\forall$ $x\in X$, then $f$ is simply called continuous.
 \end{definition}
+The idea: similarly to how continuity is defined over the real line, no matter how small a neighborhood $W$ around $f(x)$, we choose, we can always find a neighborhood around $x$, $U$, such that $f(U) \subset W$. In other words, we can always "get closer" to the point $f(x)$ by "getting closer" to point $x$.
 \begin{definition}[Homeomorphism]
 	A function $f: X\rightarrow Y$ between two topological spaces is called a homeomorphism if:
 	\begin{enumerate}
@@ -19,4 +20,17 @@ A \textbf{neighborhood} of a point $x\in X$ is any open set containing $x$ (some
 		\item $f^{-1}$ is continuous
 	\end{enumerate}
 \end{definition}
+A subset $A\subseteq X$ is closed in $X$ if it's complement is open. Equally, this means that $A$ is equal to its closure (the closure being the set itself plus all of it's boundary points). A subset $A\subseteq X$ is said to be a dense subset of $X$ if the closure of $A$ is equal to $X$. This means that any point in $X$ can be arbitrarily-well approximated by points in $A$.
+\section{Metric Topology}
+A metric space is a set $M$ with a binary operation $d: M\times M\rightarrow \mathbb{F}$ defined such that
+\begin{enumerate}
+	\item $d(x, x) = 0$ $\forall$ $x\in M$.
+	\item Positivity: If $x\ne y$, then $d(x, y) > 0$.
+	\item Symmetry: $d(x, y) = d(y, x)$.
+	\item Triangle inequality: $d(x, z) \le d(x, y) + d(y, z)$.
+\end{enumerate}
+\begin{definition}[Ball]
+	A metric ball of radius $r>0$ centered at point $p\in M$ is defined as $B_r(p)=\{x\in M\;|\;d(x, p)< r\}$.
+\end{definition}
+This induces a topology on the metric space $(M, d)$, $\tau_d$, defined such that $U\in\tau_d$ if $\forall$ $u\in U$, $\exists$ $B_r(u)\subseteq U$ for some $r>0$. This is called the metric topology.
 \section{Manifolds}
