@@ -1,3 +1,5 @@
+# .github/workflows/pages.yml
+
 name: Build and publish PDF
 
 on:
@@ -5,58 +7,38 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: {} # deny by default
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Compile LaTeX
-        uses: xu-cheng/latex-action@v4
+      - uses: actions/checkout@v4
+        with: 
+          persist-credentials: false 
+      - uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b
         with:
           root_file: main.tex
-
-      - name: Prepare Pages
-        run: |
-          mkdir public
-          cp main.pdf public/main.pdf
-
-          # Optional landing page
-          cat > public/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="UTF-8">
-            <title>Paper</title>
-          </head>
-          <body>
-            <h1>Paper</h1>
-            <p><a href="main.pdf">Download PDF</a></p>
-          </body>
-          </html>
-          EOF
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with: 
-          path: public
+      - run: mkdir -p out && cp *.pdf out/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: out
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
